@@ -1,3 +1,6 @@
+import { portfolio } from "@/portfolioInfo";
+import Link from "next/link";
+
 const Footer = () => {
   return (
     <footer
@@ -12,11 +15,20 @@ const Footer = () => {
         flexWrap: "wrap",
       }}
     >
-      <p style={{ margin: "0px", height: "25px" }}>© 2024, Martí Climent</p>
+      <p style={{ margin: "0px", height: "25px" }}>© 2024, {portfolio.personalInfo.name}</p>
       <p style={{ flex: "1" }}></p>
-      <button style={{ height: "30px", padding: "0px 20px" }}>
+      <Link
+        style={{
+          height: "30px",
+          padding: "0px 20px",
+          textDecoration: "none",
+          color: "white",
+          opacity: "50%",
+        }}
+        href="/privacy"
+      >
         Privacy and cookie policy
-      </button>
+      </Link>
       <div style={{ width: "4px" }}></div>
       <button style={{ height: "30px", padding: "0px 20px" }}>
         Contact me

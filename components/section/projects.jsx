@@ -1,10 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Projects() {
   return (
     <>
-      <section>
-        <h2 id="projects">My projects</h2>
+      <section id="projects">
+        <h2>My projects</h2>
         <div class="ProgramBox_Regular">
           <Image
             class="ProgramBox_Image"
@@ -27,7 +28,10 @@ export default function Projects() {
           >
             <h3>Project Name</h3>
             <p style={{ flexGrow: "1" }}>
-
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the standard dummy text ever since
+              the 1500s, when an unknown printer took a galley of type and
+              scrambled it to make a type specimen book
             </p>
             <div
               style={{
@@ -38,7 +42,17 @@ export default function Projects() {
               }}
             >
               <button style={{ flexGrow: "1", margin: "0 3px 0 0" }}>
-                Project homepage
+                <Link
+                  href="/projects/1"
+                  style={{
+                    textDecoration: "none",
+                    color: "white",
+                    fontWeight: "normal",
+                    opacity: "80%",
+                  }}
+                >
+                  Project homepage
+                </Link>
               </button>
             </div>
           </div>
@@ -56,7 +70,10 @@ export default function Projects() {
           >
             <h3>Project Name</h3>
             <p style={{ flexGrow: "1" }}>
-              
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the standard dummy text ever since
+              the 1500s, when an unknown printer took a galley of type and
+              scrambled it to make a type specimen book
             </p>
             <div
               style={{
@@ -67,7 +84,17 @@ export default function Projects() {
               }}
             >
               <button style={{ flexGrow: 1, margin: "0 3px 0 0" }}>
-                Project homepage
+                <Link
+                  href="/projects/1"
+                  style={{
+                    textDecoration: "none",
+                    color: "white",
+                    fontWeight: "normal",
+                    opacity: "80%",
+                  }}
+                >
+                  Project homepage
+                </Link>
               </button>
             </div>
           </div>

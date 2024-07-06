@@ -1,9 +1,33 @@
+"use client";
+
 import "@/styles/button.css";
 import "@/styles/textblock-textarea.css";
 
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { contactFormSchema } from "@/utils/schema";
+
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+
 const ContactForm = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(contactFormSchema),
+  });
+
+  const onSubmit = async (data) => {};
+
   return (
-    <form onSubmit="return false">
+    <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <div
         style={{ display: "flex", flexDirection: "column", flexWrap: "wrap" }}
       >

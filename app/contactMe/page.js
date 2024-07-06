@@ -1,4 +1,5 @@
-import ContactForm from "@/components/section/contactForm";
+import ContactForm from "@/components/contactForm";
+import { portfolio } from "@/portfolioInfo";
 import "@/styles/button.css";
 import "@/styles/textblock-textarea.css";
 
@@ -22,7 +23,7 @@ const ContactMe = () => {
         your email due to some uncaught sever error. Should this be the case,
         you may also contact me
         <b>
-          <i style={{ fontStyle: "italic" }}> at</i> suhasnidgundi@gmail.com
+          <i style={{ fontStyle: "italic" }}> at</i> {portfolio.personalInfo.email}
         </b>
       </p>
     </section>
