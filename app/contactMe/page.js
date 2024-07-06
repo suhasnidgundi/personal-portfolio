@@ -1,7 +1,12 @@
-import ContactForm from "@/components/contactForm";
 import { portfolio } from "@/portfolioInfo";
 import "@/styles/button.css";
 import "@/styles/textblock-textarea.css";
+import dynamic from "next/dynamic";
+
+const ContactForm = dynamic(() => import("@/components/contactForm"), {
+  ssr: false,
+  loading: () => <p>Loading...</p>,
+});
 
 const ContactMe = () => {
   return (

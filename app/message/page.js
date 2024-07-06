@@ -9,7 +9,7 @@ function page() {
         <i> at {portfolio.personalInfo.email}</i>
       </p>
       <p
-        class="footer"
+        className="footer"
         style={{
           borderBottomWidth: "0px",
           borderTopWidth: "1px",

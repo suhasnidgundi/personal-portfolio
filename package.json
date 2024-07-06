@@ -14,7 +14,6 @@
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
-    "react-google-recaptcha-v3": "^1.10.1",
     "react-hook-form": "^7.52.1",
     "zod": "^3.23.8"
   },

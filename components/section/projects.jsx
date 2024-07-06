@@ -6,9 +6,9 @@ export default function Projects() {
     <>
       <section id="projects">
         <h2>My projects</h2>
-        <div class="ProgramBox_Regular">
+        <div className="ProgramBox_Regular">
           <Image
-            class="ProgramBox_Image"
+            className="ProgramBox_Image"
             src="/images/placeholder.svg"
             width={100}
             height={200}
@@ -57,7 +57,7 @@ export default function Projects() {
             </div>
           </div>
         </div>
-        <div class="ProgramBox_Reversed">
+        <div className="ProgramBox_Reversed">
           <div
             style={{
               maxWidth: "600px",
@@ -102,7 +102,7 @@ export default function Projects() {
             <span>&nbsp;</span>
           </div>
           <Image
-            class="ProgramBox_Image"
+            className="ProgramBox_Image"
             src="/images/placeholder.svg"
             width={100}
             height={200}

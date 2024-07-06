@@ -3,31 +3,54 @@
 import "@/styles/button.css";
 import "@/styles/textblock-textarea.css";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactFormSchema } from "@/utils/schema";
-
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import emailjs from "@emailjs/browser";
 
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const { executeRecaptcha } = useGoogleReCaptcha();
+  const form = useRef();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, touchedFields },
+    reset,
   } = useForm({
     resolver: zodResolver(contactFormSchema),
   });
 
-  const onSubmit = async (data) => {};
+  const onSubmit = async (data) => {
+    setIsSubmitting(true);
+    try {
+      console.log(data);
+      // Send the email using EmailJS
+      emailjs
+        .sendForm(
+          process.env.SERVICE_ID,
+          process.env.TEMPLATE_ID,
+          form.current,
+          process.env.PUBLIC_KEY
+        )
+        .then(
+          () => {
+            console.log("SUCCESS!");
+          },
+          (error) => {
+            console.log("FAILED...", error);
+            setIsSubmitting(false);
+          }
+        );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form ref={form} onSubmit={handleSubmit(onSubmit)} noValidate>
       <div
         style={{ display: "flex", flexDirection: "column", flexWrap: "wrap" }}
       >
@@ -36,42 +59,59 @@ const ContactForm = () => {
         >
           <input
             type="text"
-            style={{ flexGrow: "1", margin: "3px" }}
-            onkeyup="checkName()"
-            id="name"
-            size="40"
+            style={{
+              flexGrow: "1",
+              margin: "3px",
+              borderColor: touchedFields.name
+                ? errors.name
+                  ? "red"
+                  : "green"
+                : "initial",
+            }}
+            {...register("name")}
             placeholder="Your name"
-            required
-            pattern=".{5,}"
           />
           <input
             type="email"
-            style={{ flexGrow: "1", margin: "3px" }}
-            onkeyup="checkEmail()"
-            id="email"
-            size="40"
+            style={{
+              flexGrow: "1",
+              margin: "3px",
+              borderColor: touchedFields.email
+                ? errors.email
+                  ? "red"
+                  : "green"
+                : "initial",
+            }}
+            {...register("email")}
             placeholder="Your email address"
-            required
-            pattern=".{6,}"
           />
         </div>
         <input
           type="text"
-          style={{ margin: "3px" }}
-          id="subject"
-          size="40"
+          style={{
+            margin: "3px",
+            borderColor: touchedFields.subject
+              ? errors.subject
+                ? "red"
+                : "green"
+              : "initial",
+          }}
+          {...register("subject")}
           placeholder="Email subject"
-          onkeyup="checkSubject()"
-          autocomplete="none"
-          required
         />
         <textarea
-          style={{ resize: "none", height: "400px", margin: "3px" }}
-          id="body"
-          rows="6"
-          placeholder="Email body"
-          onkeyup="checkBody()"
-          required
+          style={{
+            resize: "none",
+            height: "400px",
+            margin: "3px",
+            borderColor: touchedFields.message
+              ? errors.message
+                ? "red"
+                : "green"
+              : "initial",
+          }}
+          {...register("message")}
+          placeholder="Email message"
         ></textarea>
         <div
           style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}
@@ -79,13 +119,10 @@ const ContactForm = () => {
           <input
             type="submit"
             style={{ flexGrow: "1", margin: "3px" }}
-            id="sendButton"
-            onclick="CheckAndSend()"
-            value="Submit"
-            class="AccentButton"
+            value={isSubmitting ? "Submitting..." : "Submit"}
+            className="AccentButton"
+            disabled={isSubmitting}
           />
-          <div style={{ flexGrow: "1", margin: "3px" }}></div>
-          <div style={{ flexGrow: "1", margin: "3px" }}></div>
         </div>
       </div>
     </form>
