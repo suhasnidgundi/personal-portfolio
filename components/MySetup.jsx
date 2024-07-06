@@ -22,7 +22,7 @@ export default function MySetup() {
           <b>RAM:</b> 2GB (4x512MB) 400MHz DDR
         </li>
         <li>
-          <b>HDD:</b> 160GB WD Caviar WD1600 3.5" SATA HDD
+          <b>HDD:</b> 160GB WD Caviar WD1600 3.5 SATA HDD
         </li>
         <li>
           <b>Case:</b> Yellow-ish ATX Case
