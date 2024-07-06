@@ -14,14 +14,14 @@ const Hero = () => {
           <div class="socialDiv">
             <Image
               class="socialImg"
-              src="/images/linkedin_icon.png"
+              src="/images/linkedIn_icon.png"
               width={100}
               height={100}
             />
             <p class="socialText">LinkedIn</p>
           </div>
           <div class="socialDiv">
-            <img class="socialImg" src="images/github.webp" />
+            <Image class="socialImg" src="images/github.webp" width={100} height={100} />
             <p class="socialText">GitHub</p>
           </div>
         </div>
