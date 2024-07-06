@@ -1,5 +1,6 @@
 import { portfolio } from "@/portfolioInfo";
 import Image from "next/image";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -13,7 +14,7 @@ const Hero = () => {
         <h3 id="findme">Find me here</h3>
         <div className="SocialWidgetDiv">
           {portfolio.socialLinks.map((social, index) => (
-            <a
+            <Link
               key={index}
               className="socialDiv"
               href={social.url}
@@ -29,7 +30,7 @@ const Hero = () => {
                 alt={social.name}
               />
               <p className="socialText">{social.name}</p>
-            </a>
+            </Link>
           ))}
         </div>
       </section>

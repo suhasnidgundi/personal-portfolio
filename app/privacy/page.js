@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 function page() {
@@ -14,9 +15,9 @@ function page() {
         <br />
         <br />
         Manage your preferences:{" "}
-        <a href="#" id="open_preferences_center">
+        <Link href="#" id="open_preferences_center">
           Update cookies preferences
-        </a>
+        </Link>
       </p>
     </main>
   );
