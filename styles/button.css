@@ -1,0 +1,73 @@
+button, input[type=submit] {
+    padding: 6px 20px;
+    border-radius: 6px;
+    /*width: min(100%, 300px);*/
+    border-width: 1px;
+    transition: 0.1s;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+@media(prefers-color-scheme: dark) {
+
+    button, input[type=submit] {
+        color: #c5d1de;
+        background-color: #373e47;
+        border: 1px solid #444c56;
+    }
+
+    button:hover, input[type=submit]:hover {
+        background-color: #3d444e;
+    }
+
+    button:active, input[type=submit]:active {
+        background-color: #444c56;
+    }
+
+    button.AccentButton, input[type=submit].AccentButton {
+        color: white;
+        background-color: #347d39;
+        border: 1px solid #44864b;
+    }
+
+    button.AccentButton:hover, input[type=submit].AccentButton:hover {
+        background-color: #3b8640;
+    }
+
+    button.AccentButton:active, input[type=submit].AccentButton:active {
+        background-color: #44864b;
+    }
+}
+
+
+@media(prefers-color-scheme: light) {
+
+    button, input[type=submit] {
+        color: #24292f;
+        background-color: #f6f8fa;
+        border: 1px solid #d0d7de;
+    }
+
+    button:hover, input[type=submit]:hover {
+        background-color: #eef1f4;
+    }
+
+    button:active, input[type=submit]:active {
+        background-color: #d9e0e7;
+    }
+
+    button.AccentButton, input[type=submit].AccentButton {
+        color: white;
+        background-color: #1f883d;
+        border: 1px solid #1c7336;
+    }
+
+    button.AccentButton:hover, input[type=submit].AccentButton:hover {
+        background-color: #1c8139;
+    }
+
+    button.AccentButton:active, input[type=submit].AccentButton:active {
+        background-color: #1c7336;
+    }
+}

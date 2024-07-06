@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body, html
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+#maindiv_header
+{
+    position: sticky;
+    z-index: 10;
+    top: 0px;
+    margin: 0px;
+    padding: 0px;
+    flex-direction: row;
+    align-items: right;
+    display: flex;
+    justify-content: stretch;
+    flex-wrap: wrap;
+    align-items: center;
+    transition: 0.2s;
+}
+
+#mainTitleContainer_header
+{   padding: 0px 10px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    transition: 0.1s;
+}
+
+#mainTitle_header
+{
+    padding: 0px;
+    margin: 0px;
+    font-size: 30px;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    transition: 0.1s;
+}
+
+.titlebarBtn_header
+{
+    display: flex;
+    cursor: pointer;
+    height: 100%;
+    padding: 0px 15px;
+    text-align: center;
+    vertical-align: middle;
+    transition: 0.2s;
+    border-radius: 8px;
+    margin: 4px 2px;
+    text-decoration: none;
+    border: 1px solid transparent;
+
+}
+.titlebarBtn_header:hover
+{
+    text-decoration: none;
+    height: 62px;
+}
+
+.titlebarContent_header
+{
+    padding: 0px 0px;
+    height: 100%;
+    display: flex;
+    font-weight: inherit;
+    justify-content: center;
+    align-items: center;
+}
+
+.titlebarParagraph_header
+{
+    height: auto;
+    padding: 0px;
+    margin: 0px;
+    font-size: 12px;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: inherit;
+    font-style: normal;
+    transition: 0.1s;
+    text-decoration: none;
+}
+.titlebarParagraph_header:hover
+{
+    text-decoration: none;
+}
+
+@media(max-width: 840px)
+{
+    #mainTitle_header
+    {
+        font-size: 20pt;
+    }
+}
+
+@media(max-width: 640px)
+{
+    #mainTitle_header
+    {
+        font-size: 16pt;
+    }
+}
+
+@media(max-width: 440px)
+{
+    #mainTitle_header
+    {
+        font-size: 12pt;
+    }
+}
+
+
+@media (prefers-color-scheme: dark)
+{
+    #maindiv_header
+    {
+        color: #c5d1de;
+        background-color: #1C1E22;
+        border-bottom: 1px solid #34393e;
+    }
+    .titlebarBtn_header:hover
+    {
+        background-color: #22272e;
+        border: 1px solid #34393e;
+    }
+}
+@media (prefers-color-scheme: light)
+{
+    #maindiv_header
+    {
+        color: black;
+        background-color: #f6f8fa;
+        border-bottom: 1px solid #d0d7de;
+    }
+    .titlebarBtn_header:hover
+    {
+        background-color: #ffffff;
+        border: 1px solid #d0d7de;
+    }
+    .titlebarParagraph_header
+    {
+        color: black;
+    }
+}
+

@@ -1,0 +1,1089 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+* {
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-optical-sizing: auto;
+    font-weight: 350;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    transition: font-size 0.1s;
+}
+
+html {
+    scroll-behavior: smooth;
+    /*overflow-x: hidden;
+    touch-action: cross-slide-y;*/
+}
+
+p,
+ol,
+ul,
+li {
+    text-align: justify;
+    justify-content: center;
+}
+
+
+ol,
+ul,
+li {
+    margin: 4px 0px;
+}
+
+ol.tableofcontents,
+li.tableofcontents,
+ul.tableofcontents {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+
+body {
+    margin: 0 auto;
+    touch-action: cross-slide-y;
+}
+
+#mainContent {
+    width: min(960px, 100%);
+    float: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.adDiv {
+    border-radius: 0px;
+    overflow-x: auto;
+    resize: none;
+    align-items: center;
+    flex-direction: column;
+}
+
+.adDiv-WidthExpandableDiv {
+    align-items: baseline;
+}
+
+
+.stuckFooter {
+    margin-left: 20px;
+    border-width: 1px;
+    position: relative;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    height: 40px;
+    width: min(760px, calc(100% - 40px));
+    left: calc(50% - 20px);
+    transform: translateX(-50%);
+}
+
+.bodydiv {
+    width: min(760px, calc(100% - 40px));
+    left: calc(50% - 20px);
+    margin-left: 20px;
+    margin-right: 20px;
+    z-index: -6;
+}
+
+
+h1 {
+    font-size: 27pt;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+h3 {
+    font-size: 14pt;
+}
+
+h4 {
+    font-size: 12pt;
+    margin-bottom: 2px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    border-radius: 0;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    background-color: transparent;
+    margin: 0px;
+    padding: 5px 0px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-width: 0 0 1px 0;
+}
+
+
+a {
+    font-family: unset;
+}
+
+b,
+strong {
+    font-weight: 600;
+}
+
+samp {
+    display: none;
+}
+
+img {
+    background: transparent;
+    border-radius: 0px;
+    display: block;
+    max-width: calc(100% - 8px);
+}
+
+img::selection {
+    background-color: transparent;
+}
+
+td {
+    font-size: 11pt;
+    font-weight: 300;
+}
+
+
+.bgColor {
+    margin-right: auto;
+    background-color: transparent;
+}
+
+h1 {
+    font-size: 22pt;
+}
+
+h2 {
+    font-size: 19pt;
+}
+
+h3 {
+    font-size: 16pt;
+}
+
+h4 {
+    font-size: 13pt;
+}
+
+@media only screen and(max-width: 400px) {
+
+    .socialText {
+        font-size: 10px;
+    }
+}
+
+
+
+
+.textcheck {
+    border: none;
+    background-color: transparent;
+    width: 150px;
+}
+
+.textarea {
+    resize: vertical;
+    width: min(calc(100% - 8px), 700px);
+    height: 250px;
+    padding-left: 8px;
+    padding-top: 8px;
+    outline: none;
+    border-radius: 6px;
+    border-width: 1px;
+    transition: 0.2s;
+}
+
+.container {
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 50px;
+    cursor: pointer;
+    font-size: 11pt;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.container input {
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    margin-top: -5px;
+    border-radius: 6px;
+    border-width: 1px;
+    transition: 0.2s;
+}
+
+.container:hover input~.checkmark {
+    border-width: 1px;
+}
+
+.container input:checked~.checkmark {
+    border-width: 1px;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.container input:checked~.checkmark:after {
+    display: block;
+}
+
+.MainAppTitle {
+    font-size: 30pt;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 650;
+    padding: 0px;
+    margin: 0px;
+    vertical-align: bottom;
+}
+
+.MainAppSubtitle {
+    vertical-align: top;
+    font-size: 16pt;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 450;
+    padding: 0px;
+    margin: 0px;
+}
+
+.container .checkmark:after {
+    left: 8px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid #eee;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+::selection {
+    color: inherit;
+}
+
+::-moz-selection {
+    color: inherit;
+}
+
+.programboxtitle {
+    text-align: center;
+}
+
+.socialDiv {
+    border-width: 1px;
+    border-radius: 8px;
+    margin: 0px;
+    cursor: pointer;
+    flex-grow: 1;
+    user-select: none;
+    transition: 0.2s;
+    vertical-align: middle;
+    display: flex;
+    flex-direction: row;
+    padding: 4px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.socialDiv:hover {
+    border-width: 1px;
+}
+
+.socialDiv:active {
+    border-width: 1px;
+}
+
+.SocialWidgetDiv {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 8px 0px;
+    justify-content: space-between;
+    margin-right: -8px;
+    margin-bottom: -8px;
+}
+
+.socialImg {
+    width: 48px;
+    vertical-align: middle;
+    height: 48px;
+    padding: 2px;
+    margin: 0px;
+    border: 0 solid black;
+    border-radius: 6px;
+}
+
+.socialText {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 500;
+    padding: 0px;
+    margin: 0px;
+    flex-grow: 1;
+    height: auto;
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px 0px;
+}
+
+.pkgIcon {
+    width: 128px;
+    height: 128px;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 0px;
+}
+
+
+.badge {
+    border-radius: 0;
+    margin: 0;
+    border: 0;
+    box-shadow: none;
+    padding: none;
+}
+
+div.contentIsland {
+    margin: 20px 0;
+    padding: 40px;
+    border-radius: 16px;
+    border-width: 0px;
+}
+
+.mySlides {
+    display: none;
+}
+
+img.slides {
+    vertical-align: middle;
+}
+
+.slideshow-container {
+    width: 100%;
+    position: relative;
+}
+
+.textSlides {
+    font-size: 11pt;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+    margin: 4px;
+    border-bottom-right-radius: 4px;
+    text-align: center;
+}
+
+.numbertextSlides {
+    font-size: 11pt;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+.dotSlides {
+    height: 2px;
+    width: 40px;
+    margin: 0 2px;
+    border-radius: 0;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+
+.fadeInSlides {
+    position: absolute;
+    animation-name: fadein;
+    animation-duration: 4s;
+}
+
+@keyframes fadein {
+    0% {
+        transform: translateX(0%);
+        opacity: 0;
+        display: block;
+    }
+
+    25% {
+        transform: translateX(0%);
+        opacity: 100;
+        display: block;
+    }
+
+    75% {
+        transform: translateX(0%);
+        opacity: 100;
+        display: block;
+    }
+
+    100% {
+        transform: translateX(0%);
+        opacity: 0;
+        display: none;
+    }
+}
+
+
+.headText {
+    font-size: 24pt;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+@media only screen and(max-width: 450px) {
+    .text {
+        font-size: 11pt;
+    }
+
+    .headText {
+        font-size: 12pt;
+    }
+}
+
+code,
+.code {
+    border-width: 1px;
+    font-family: monospace;
+    padding: 2px 4px;
+    border-radius: 0px;
+}
+
+.codeblock {
+    border-width: 0px;
+    font-family: monospace;
+    padding: 16px 16px;
+    border-radius: 0px;
+    margin: 8px 0px;
+    display: block;
+    font-size: 14px;
+}
+
+.expandableImage {
+    cursor: pointer;
+    width: calc(100% - 100px);
+    margin: 20px 50px;
+    text-align: center;
+    display: block;
+    transition: 0.2s;
+}
+
+.shownExpandableImage {
+    visibility: hidden;
+    max-height: calc(100% - 50px);
+    max-width: calc(100% - 50px);
+}
+
+.flexOverlayDiv {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainOverlayDiv {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    cursor: pointer;
+    left: 0;
+    visibility: hidden;
+    filter: opacity(0%);
+    transition: 0.1s;
+    z-index: 10;
+}
+
+.mainOverlayDivVisible {
+    filter: opacity(100%);
+}
+
+.mainOverlayCloseButton {
+    height: 80px;
+    width: 80px;
+    z-index: 11;
+    position: absolute;
+    font-size: 40px;
+    right: 20px;
+    top: 20px;
+}
+
+div.mainArticleEntryDiv {
+    margin: 8px 0px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border-width: 1px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+div.mainArticleEntryDiv:hover {
+    border-width: 1px;
+}
+
+div.mainArticleEntryDiv:active {
+    border-width: 1px;
+}
+
+.articleTitle {
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+.articleDescription {
+    padding: 0;
+    margin: 0;
+    margin-left: 3pt;
+    margin-top: 5px;
+}
+
+li.contentTable {
+    padding: 0;
+    margin: 0;
+    list-style-type: default;
+    text-decoration: none;
+}
+
+
+a.contentTable {
+    font-size: 13pt;
+    font-weight: 450;
+}
+
+a {
+    text-decoration: underline;
+    transition: 0.1s;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+.ProgramBox_Regular {
+    margin: 10px 0px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 350px 8px auto;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.ProgramBox_Reversed {
+    margin: 10px 0px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: auto 16px 350px;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.ProgramBox_Image {
+    width: 350px;
+}
+
+@media(max-width: 960px) {
+    div.contentIsland {
+        margin: 0px 0;
+        padding: 40px 20px;
+        border-left: 0px solid transparent;
+        border-right: 0px solid transparent;
+        border-radius: 0px;
+        border-width: 0px;
+    }
+
+    h1 {
+        font-size: 20pt;
+    }
+
+    h2 {
+        font-size: 17pt;
+    }
+
+    h3 {
+        font-size: 14pt;
+    }
+
+    h4 {
+        font-size: 11pt;
+    }
+}
+
+@media(max-width: 800px) {
+    .ProgramBox_Regular {
+        grid-template-columns: 250px 16px auto;
+    }
+
+    .ProgramBox_Reversed {
+        grid-template-columns: auto 16px 250px;
+    }
+
+    .ProgramBox_Image {
+        width: 250px;
+    }
+}
+
+@media(max-width: 640px) {
+    #mainContent {
+        width: max(min(960px, 100%));
+    }
+
+    .expandableImage {
+        cursor: pointer;
+        width: calc(100% - 20px);
+        margin: 20px 10px;
+        text-align: center;
+        display: block;
+        transition: 0.2s;
+    }
+
+    div.contentIsland {
+        margin: 0px 0;
+        padding: 20px 10px;
+        border-left: 0px solid transparent;
+        border-right: 0px solid transparent;
+        border-radius: 0px;
+        border-width: 0px;
+    }
+
+    h1 {
+        font-size: 16pt;
+    }
+
+    h2 {
+        font-size: 13pt;
+    }
+
+    h3 {
+        font-size: 10pt;
+    }
+
+    h4 {
+        font-size: 7pt;
+    }
+
+
+    .ProgramBox_Regular {
+        display: flex;
+        flex-direction: column-reverse;
+        grid-template-columns: auto;
+        grid-template-rows: 200px 8px auto;
+        align-items: center;
+    }
+
+    .ProgramBox_Reversed {
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: auto;
+        grid-template-rows: auto 8px 200px;
+    }
+
+    .ProgramBox_Image {
+        width: 600px;
+    }
+
+}
+
+@media(prefers-color-scheme: dark) {
+    .adDiv {
+        background-color: #2d333b;
+    }
+
+    :root {
+        color-scheme: dark;
+    }
+
+    body {
+        background-color: #1C1E22;
+    }
+
+    .floatingFooter {
+        background-color: #212222ff;
+        border: 1px solid rgba(127, 127, 127, 10%);
+    }
+
+    .stuckFooter {
+        background-color: rgba(127, 127, 127, 10%);
+        border: 1px solid rgba(127, 127, 127, 10%);
+    }
+
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        border-color: #3a414a;
+        color: #c5d1de;
+    }
+
+    p,
+    ol,
+    ul,
+    li {
+        color: #c5d1de;
+    }
+
+    img {
+        background: transparent;
+    }
+
+
+
+
+
+    .checkmark {
+        background-color: rgba(127, 127, 127, 10%);
+        border: 1px solid rgba(127, 127, 127, 10%);
+    }
+
+    .container:hover input~.checkmark {
+        border: 1px solid rgba(127, 127, 127, 20%);
+        background-color: rgba(127, 127, 127, 20%);
+    }
+
+    .container input:checked~.checkmark {
+        background-color: #431948;
+        border: 1px solid rgba(127, 127, 127, 10%);
+    }
+
+    .container .checkmark:after {
+        border: solid #eee;
+    }
+
+    .programbox {
+        background-color: rgba(127, 127, 127, 10%);
+        border: 1px solid rgba(127, 127, 127, 10%);
+    }
+
+    ::selection {
+        background-color: rgba(127, 127, 127, 20%);
+    }
+
+    ::-moz-selection {
+        background-color: rgba(127, 127, 127, 20%);
+    }
+
+    .socialDiv,
+    .ProgramBox_Reversed,
+    .ProgramBox_Regular {
+        background-color: rgba(127, 127, 127, 10%);
+        border: 1px solid rgba(127, 127, 127, 10%);
+    }
+
+    .socialDiv:hover {
+        background-color: rgba(127, 127, 127, 20%);
+        border: 1px solid rgba(127, 127, 127, 10%);
+    }
+
+    .socialDiv:active {
+        background-color: rgba(127, 127, 127, 30%);
+        border: 1px solid rgba(127, 127, 127, 20%);
+    }
+
+    .socialImg {
+        border: 0 solid black;
+    }
+
+    .pkgIcon {
+        background-color: transparent;
+    }
+
+    div.contentIsland {
+        border: 1px solid #34393e;
+        background-color: rgba(127, 127, 127, 10%);
+        background-color: #22272e;
+    }
+
+    .textSlides {
+        color: #f2f2f2;
+        background-color: #202020;
+    }
+
+    .numbertextSlides {
+        color: #f2f2f2;
+    }
+
+    .dotSlides {
+        background-color: #404040;
+    }
+
+    .activeSlides {
+        background-color: #717171;
+    }
+
+    .headText {
+        font-size: 24pt;
+        font-family: "Montserrat", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 700;
+        font-style: normal;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+    }
+
+    code,
+    .code,
+    .codeblock {
+        background-color: #2d333b;
+        border: 1px solid #2d333b;
+    }
+
+    .mainOverlayDiv {
+        background-color: rgba(0, 0, 0, 75%);
+    }
+
+    div.mainArticleEntryDiv {
+        background-color: rgba(127, 127, 127, 10%);
+        border: 1px solid rgba(127, 127, 127, 10%);
+    }
+
+
+    div.mainArticleEntryDiv:hover {
+        background-color: rgba(127, 127, 127, 20%);
+        border: 1px solid rgba(127, 127, 127, 10%);
+    }
+
+    div.mainArticleEntryDiv:active {
+        background-color: rgba(127, 127, 127, 30%);
+        border: 1px solid rgba(127, 127, 127, 20%);
+    }
+
+    .articleDescription {
+        color: #cccccc;
+    }
+
+    li.contentTable::marker {
+        color: #478be6;
+        background-color: #478be6;
+    }
+
+    a {
+        color: #478be6;
+    }
+
+    a:hover {
+        color: #478be6;
+    }
+
+    .footer {
+        border-top: 1px solid #34393e;
+    }
+
+}
+
+
+@media(prefers-color-scheme: light) {
+    .adDiv {
+        background-color: #f6f8fa;
+    }
+
+    :root {
+        color-scheme: light;
+    }
+
+    body {
+        background-color: #f6f8fa;
+    }
+
+    .floatingFooter {
+        background-color: #ddd;
+        border: 1px solid rgba(0, 0, 0, 10%);
+    }
+
+    .stuckFooter {
+        background-color: rgba(0, 0, 0, 10%);
+        border: 1px solid rgba(0, 0, 0, 10%);
+    }
+
+    #backgroundTexture {
+        background-color: rgba(255, 255, 255, 100%);
+        background-image: url('/images/background-light.jpg');
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        border-color: #d0d7de;
+    }
+
+    img {
+        background: transparent;
+    }
+
+    .checkmark {
+        background-color: rgba(255, 255, 255, 20%);
+        border: 1px solid rgba(255, 255, 255, 20%);
+    }
+
+    .container:hover input~.checkmark {
+        border: 1px solid rgba(255, 255, 255, 50%);
+        background-color: rgba(255, 255, 255, 50%);
+    }
+
+    .container input:checked~.checkmark {
+        background-color: #431948;
+        border: 1px solid rgba(255, 255, 255, 20%);
+    }
+
+    .container .checkmark:after {
+        border: solid #111;
+    }
+
+    .programbox {
+        background-color: rgba(255, 255, 255, 20%);
+        border: 1px solid rgba(255, 255, 255, 20%);
+    }
+
+    ::selection {
+        background-color: rgba(200, 200, 200, 80%);
+    }
+
+    ::-moz-selection {
+        background-color: rgba(200, 200, 200, 80%);
+    }
+
+    .socialDiv,
+    .ProgramBox_Reversed,
+    .ProgramBox_Regular {
+        background-color: #f6f8fa;
+        border: 1px solid #d0d7de;
+    }
+
+    .socialDiv:hover {
+        border: 1px solid #d0d7de;
+        background-color: #ffffff;
+    }
+
+    .socialDiv:active {
+        background-color: rgba(127, 127, 127, 30%);
+        border: 1px solid rgba(255, 255, 255, 50%);
+    }
+
+    .socialImg {
+        border: 0 solid white;
+    }
+
+    .pkgIcon {
+        background-color: transparent;
+    }
+
+    div.contentIsland {
+        border: 1px solid #d0d7de;
+        background-color: white;
+    }
+
+    .textSlides {
+        color: #000000;
+        background-color: #eeeeee;
+    }
+
+    .numbertextSlides {
+        color: #f2f2f2;
+    }
+
+    .dotSlides {
+        background-color: #cccccc;
+    }
+
+    .activeSlides {
+        background-color: #999999;
+    }
+
+    .headText {
+        font-size: 24pt;
+        font-family: "Montserrat", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 700;
+        font-style: normal;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+    }
+
+
+    code,
+    .code,
+    .codeblock {
+        background-color: #f6f8fa;
+        border: 1px solid #f6f8fa;
+    }
+
+    .mainOverlayDiv {
+        background-color: rgba(0, 0, 0, 75%);
+    }
+
+    div.mainArticleEntryDiv {
+        background-color: rgba(255, 255, 255, 30%);
+        border: 1px solid rgba(0, 0, 0, 12%);
+    }
+
+    div.mainArticleEntryDiv:hover {
+        border: 1px solid rgba(0, 0, 0, 12%);
+        background-color: rgba(255, 255, 255, 60%);
+    }
+
+    div.mainArticleEntryDiv:active {
+        background-color: rgba(255, 255, 255, 50%);
+        border: 1px solid rgba(255, 255, 255, 50%);
+    }
+
+    .articleDescription {
+        color: #111111;
+    }
+
+    li.contentTable::marker {
+        color: #0969da;
+        background-color: #0969da;
+    }
+
+    a {
+        color: #0969da;
+        font-weight: 400;
+    }
+
+    a:hover {
+        color: #0969da;
+    }
+
+    .mainOverlayCloseButton {
+        color: white;
+    }
+
+    .badge {
+        filter: none;
+    }
+
+    .footer {
+        border-top: 1px solid #c7cacd;
+    }
+
+}
