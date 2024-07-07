@@ -1,6 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
+
+:root {
+    --skeleton-base-color: #e0e0e0;
+    --skeleton-highlight-color: #f0f0f0;
+}
+
+/* Dark theme example */
+.dark-theme {
+    --skeleton-base-color: #2a2a2a;
+    --skeleton-highlight-color: #3a3a3a;
+}
+
 * {
     -webkit-font-smoothing: antialiased;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";

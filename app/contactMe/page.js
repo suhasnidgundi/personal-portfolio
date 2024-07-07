@@ -12,13 +12,13 @@ const ContactMe = () => {
   return (
     <section>
       <h2
-        class="bgColor"
+        className="bgColor"
         style={{ position: "relative", top: "calc(50% - 5px)", left: "0px" }}
         id="contact"
       >
         Contact me!
       </h2>
-      <p class="bgColor" style={{ width: "100%" }}>
+      <p className="bgColor" style={{ width: "100%" }}>
         Want to get in touch with me? Fill the <b>following form</b>. I will
         reply as soon as I can.
       </p>

@@ -3,8 +3,15 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "Suhas Nidgundi | Personal Portfolio",
+  title: "",
   description: "",
+  author: "",
+  keywords: "",
+  robots: "",
+  viewport: "",
+  themeColor: "",
+  msapplicationTileColor: "",
+  msapplicationTileImage: "",
 };
 
 export default function RootLayout({ children }) {
@@ -13,7 +20,7 @@ export default function RootLayout({ children }) {
       <body>
         <Header />
         <div id="mainContent">
-          <div class="contentIsland">
+          <div className="contentIsland">
             {children}
             <Footer />
           </div>
