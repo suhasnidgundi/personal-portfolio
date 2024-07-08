@@ -12,7 +12,7 @@ function Header({ config = headerConfig }) {
   return (
     <header id="maindiv_header">
       <div id="mainTitleContainer_header">
-        {/* {config.logo && (
+        {config.logo && (
           <Image
             style={{ width: `${config?.logo?.width}px`, marginRight: "8px" }}
             src={config.logo.src}
@@ -20,11 +20,11 @@ function Header({ config = headerConfig }) {
             height={config.logo.height}
             alt={config.logo.alt}
           />
-        )} */}
+        )}
         <span id="mainTitle_header">
-          <Link style={config.title.style} href={config.title.href}>
+          <span style={config.title.style} href={config.title.href}>
             {config.title.text}
-          </Link>
+          </span>
         </span>
       </div>
       <div style={{ flexGrow: "1" }}></div>
