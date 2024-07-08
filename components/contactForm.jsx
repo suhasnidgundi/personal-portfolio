@@ -8,7 +8,7 @@ import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactFormSchema } from "@/utils/schema";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,18 +29,15 @@ const ContactForm = () => {
     setIsSubmitting(true);
     setShowError(false);
     try {
-      const result = await emailjs.sendForm(
+      await emailjs.sendForm(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
         form.current,
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
       );
-
-      console.log(result.text);
       await fetchQuote();
       setShowThankYou(true);
     } catch (error) {
-      console.log(error);
       setShowError(true);
     } finally {
       setIsSubmitting(false);
