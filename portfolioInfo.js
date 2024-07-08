@@ -21,6 +21,11 @@ export const portfolio = {
       url: "https://www.instagram.com/suhasnidgundi/",
       image: "/images/instagram_icon.png",
     },
+    {
+      name: "ORCID",
+      url: "https://orcid.org/0009-0004-1241-6596",
+      image: "/images/orcid_icon.png",
+    },
   ],
 
   setup: {

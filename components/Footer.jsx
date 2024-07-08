@@ -15,7 +15,9 @@ const Footer = () => {
         flexWrap: "wrap",
       }}
     >
-      <p style={{ margin: "0px", height: "25px" }}>© 2024, {portfolio.personalInfo.name}</p>
+      <p style={{ margin: "0px", height: "25px" }}>
+        © 2024, {portfolio.personalInfo.name}
+      </p>
       <p style={{ flex: "1" }}></p>
       <Link
         style={{
@@ -31,7 +33,12 @@ const Footer = () => {
       </Link>
       <div style={{ width: "4px" }}></div>
       <button style={{ height: "30px", padding: "0px 20px" }}>
-        Contact me
+        <Link
+          href="/contactMe"
+          style={{ textDecoration: "none", color: "white", fontWeight: "bold" }}
+        >
+          Contact me
+        </Link>
       </button>
     </footer>
   );

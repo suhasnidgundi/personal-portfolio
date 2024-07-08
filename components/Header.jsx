@@ -22,9 +22,9 @@ function Header({ config = headerConfig }) {
           />
         )}
         <span id="mainTitle_header">
-          <span style={config.title.style} href={config.title.href}>
+          <Link style={config.title.style} href={config.title.href}>
             {config.title.text}
-          </span>
+          </Link>
         </span>
       </div>
       <div style={{ flexGrow: "1" }}></div>
