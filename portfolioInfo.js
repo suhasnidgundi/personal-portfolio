@@ -16,34 +16,10 @@ export const portfolio = {
       url: "https://github.com/suhasnidgundi",
       image: "/images/github.webp",
     },
-  ],
-
-  projects: [
     {
-      name: "UniGetUI (formerly WingetUI)",
-      description:
-        "A graphical interface to install, update remove and manage packages from the most common Package Managers for Windows, such as Winget, Scoop, Chocolatey and many more",
-      image: "resources/winget.webp",
-      links: [
-        { text: "Project homepage", url: "/unigetui" },
-        {
-          text: "Download",
-          url: "https://github.com/marticliment/UniGetUI/releases/latest/download/UniGetUI.Installer.exe",
-        },
-      ],
-    },
-    {
-      name: "ElevenClock - A better clock for Windows 11",
-      description:
-        "A better clock for Windows 11: ElevenClock will let you customize your taskbar clock, adding seconds, moving it around, changing its color and much more, like in the good old days.",
-      image: "resources/elevenclock.webp",
-      links: [
-        { text: "Project homepage", url: "/elevenclock" },
-        {
-          text: "Download",
-          url: "https://github.com/marticliment/ElevenClock/releases/latest/download/ElevenClock.Installer.exe",
-        },
-      ],
+      name: "Instagram",
+      url: "https://www.instagram.com/suhasnidgundi/",
+      image: "/images/instagram_icon.png",
     },
   ],
 

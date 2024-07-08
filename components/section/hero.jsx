@@ -6,7 +6,7 @@ const Hero = () => {
   return (
     <>
       <section id="aboutme">
-        <h1>Hi!</h1>
+        <h1>Hi 👋</h1>
         <p className="bgColor" id="selftext">
           {portfolio.personalInfo.description}
         </p>
