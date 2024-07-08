@@ -34,7 +34,7 @@ const ProjectsPage = async () => {
               title={project.title}
               description={project.description}
               imageSrc={project.screenshots[0] || "/images/placeholder.svg"}
-              link={project.slug}
+              link={project.slug || "/default-path"} // Provide a fallback value for `link`
             />
           ))
         )}
