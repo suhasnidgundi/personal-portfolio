@@ -1,0 +1,34 @@
+/* styles/globals.css */
+.thank-you-card {
+    background-color: #34393e;
+    border-radius: 8px;
+    padding: 20px;
+    border-style: ridge;
+    border-color: green;
+    text-align: center;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.thank-you-card h2 {
+    color: #c5d1de;
+}
+
+.thank-you-card .quote {
+    font-style: italic;
+    margin: 20px 0;
+    color: #c5d1d;
+}
+
+.thank-you-card button {
+    background-color: #4a4a4a;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.thank-you-card button:hover {
+    background-color: #3a3a3a;
+}

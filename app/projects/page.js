@@ -4,7 +4,7 @@ import { getAllDocuments } from "@/utils/appwrite/databaseService";
 export const fetchProjects = async () => {
   try {
     const projects = await getAllDocuments();
-    console.log(projects.screenshots);
+    console.log("Project Screenshots : ", projects.screenshots);
     return projects;
   } catch (error) {
     console.error("Failed to fetch projects:", error);

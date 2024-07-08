@@ -1,0 +1,17 @@
+.error-card {
+    background-color: #34393e;
+    border: 1px solid #ef9a9a;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.error-card h2 {
+    color: #c62828;
+}
+
+.error-card button {
+    margin-top: 15px;
+}

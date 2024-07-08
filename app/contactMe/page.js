@@ -1,12 +1,8 @@
+// app/contact/page.js
 import { portfolio } from "@/portfolioInfo";
 import "@/styles/button.css";
 import "@/styles/textblock-textarea.css";
-import dynamic from "next/dynamic";
-
-const ContactForm = dynamic(() => import("@/components/contactForm"), {
-  ssr: false,
-  loading: () => <p>Loading...</p>,
-});
+import ContactForm from "@/components/contactForm";
 
 const ContactMe = () => {
   return (
@@ -28,7 +24,8 @@ const ContactMe = () => {
         your email due to some uncaught sever error. Should this be the case,
         you may also contact me
         <b>
-          <i style={{ fontStyle: "italic" }}> at</i> {portfolio.personalInfo.email}
+          <i style={{ fontStyle: "italic" }}> at</i>{" "}
+          {portfolio.personalInfo.email}
         </b>
       </p>
     </section>
