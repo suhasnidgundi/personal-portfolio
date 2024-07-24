@@ -21,13 +21,13 @@ function Header({ config = headerConfig }) {
 
           <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
             {config.navItems.map((item, index) => (
-              <a
+              <Link
                 key={index}
                 class="me-3 py-2 link-body-emphasis text-decoration-none"
                 href={item.href}
               >
                 {item.text}
-              </a>
+              </Link>
             ))}
           </nav>
         </div>
