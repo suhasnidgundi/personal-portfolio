@@ -1,12 +1,15 @@
 import { portfolio } from "@/portfolioInfo";
 import Image from "next/image";
 import Link from "next/link";
+import "@/styles/hero/style.css";
 
 const Hero = () => {
   return (
     <>
       <section id="aboutMe">
-        <h1>Hi 👋</h1>
+        <h1>
+          Hi <span className="waving-hand">👋</span>
+        </h1>
         <p className="bgColor" id="selftext">
           {portfolio.personalInfo.description}
         </p>
