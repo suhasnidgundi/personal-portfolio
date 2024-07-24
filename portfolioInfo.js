@@ -1,7 +1,7 @@
 export const portfolio = {
   personalInfo: {
     name: "Suhas Nidgundi",
-    description: "I'm a software developer and a student from India.",
+    description: "",
     email:"suhasnidgundi@gmail.com"
   },
 
