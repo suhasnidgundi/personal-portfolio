@@ -30,7 +30,6 @@ const ProjectCard = ({ title, description, imageSrc, link }) => {
               href={link}
               style={{
                 textDecoration: "none",
-                color: "white",
                 fontWeight: "normal",
                 opacity: "80%",
               }}

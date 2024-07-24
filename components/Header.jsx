@@ -1,8 +1,7 @@
-import Image from "next/image";
 import "@/styles/header/style.css";
-import Link from "next/link";
 import { headerConfig } from "@/portfolioInfo";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 dynamic(() => import(require("@/libs/header/script")), {
   loading: () => <p>Loading...</p>,
@@ -10,31 +9,29 @@ dynamic(() => import(require("@/libs/header/script")), {
 
 function Header({ config = headerConfig }) {
   return (
-    <header id="maindiv_header">
-      <div id="mainTitleContainer_header">
-        {config.logo && (
-          <Image
-            style={{ width: `${config?.logo?.width}px`, marginRight: "8px" }}
-            src={config.logo.src}
-            width={config.logo.width}
-            height={config.logo.height}
-            alt={config.logo.alt}
-          />
-        )}
-        <span id="mainTitle_header">
-          <Link style={config.title.style} href={config.title.href}>
-            {config.title.text}
+    <header>
+      <div className="container">
+        <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+          <Link
+            href={config.title.href}
+            class="d-flex align-items-center link-body-emphasis text-decoration-none"
+          >
+            <span class="fs-4">{config.title.text}</span>
           </Link>
-        </span>
+
+          <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+            {config.navItems.map((item, index) => (
+              <a
+                key={index}
+                class="me-3 py-2 link-body-emphasis text-decoration-none"
+                href={item.href}
+              >
+                {item.text}
+              </a>
+            ))}
+          </nav>
+        </div>
       </div>
-      <div style={{ flexGrow: "1" }}></div>
-      {config.navItems.map((item, index) => (
-        <Link key={index} className="titlebarBtn_header" href={item.href}>
-          <div className="titlebarContent_header">
-            <p className="titlebarParagraph_header">{item.text}</p>
-          </div>
-        </Link>
-      ))}
     </header>
   );
 }

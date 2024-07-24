@@ -35,7 +35,7 @@ const Footer = () => {
       <button style={{ height: "30px", padding: "0px 20px" }}>
         <Link
           href="/contactMe"
-          style={{ textDecoration: "none", color: "white", fontWeight: "bold" }}
+          style={{ textDecoration: "none", fontWeight: "bold" }}
         >
           Contact me
         </Link>
