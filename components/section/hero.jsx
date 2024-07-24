@@ -5,7 +5,7 @@ import Link from "next/link";
 const Hero = () => {
   return (
     <>
-      <section id="aboutme">
+      <section id="aboutMe">
         <h1>Hi 👋</h1>
         <p className="bgColor" id="selftext">
           {portfolio.personalInfo.description}

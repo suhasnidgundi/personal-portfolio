@@ -11,19 +11,19 @@ function Header({ config = headerConfig }) {
   return (
     <header>
       <div className="container">
-        <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+        <div className="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
           <Link
             href={config.title.href}
-            class="d-flex align-items-center link-body-emphasis text-decoration-none"
+            className="d-flex align-items-center link-body-emphasis text-decoration-none"
           >
-            <span class="fs-4">{config.title.text}</span>
+            <span className="fs-4">{config.title.text}</span>
           </Link>
 
-          <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+          <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
             {config.navItems.map((item, index) => (
               <Link
                 key={index}
-                class="me-3 py-2 link-body-emphasis text-decoration-none"
+                className="me-3 py-2 link-body-emphasis text-decoration-none"
                 href={item.href}
               >
                 {item.text}

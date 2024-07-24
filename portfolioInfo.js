@@ -63,8 +63,8 @@ export const headerConfig = {
     },
   },
   navItems: [
-    { text: "ABOUT ME", href: "#aboutme" },
+    { text: "ABOUT ME", href: "#aboutMe" },
     { text: "MY PROJECTS", href: "#projects" },
-    { text: "CONTACT ME", href: "/contactMe" },
+    { text: "CONTACT ME", href: "#contactMe" },
   ],
 };

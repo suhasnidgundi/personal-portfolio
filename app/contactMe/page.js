@@ -6,7 +6,7 @@ import ContactForm from "@/components/contactForm";
 
 const ContactMe = () => {
   return (
-    <section>
+    <section id="contactMe">
       <h2
         className="bgColor"
         style={{ position: "relative", top: "calc(50% - 5px)", left: "0px" }}
