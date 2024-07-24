@@ -60,7 +60,6 @@ export const headerConfig = {
       fontWeight: "bold",
       filter: "opacity(60%)",
       textDecoration: "none",
-      color: "white",
     },
   },
   navItems: [
