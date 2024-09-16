@@ -26,14 +26,14 @@ export function FloatingThemeButton() {
       onClick={toggleColorScheme}
       variant="filled"
       color="blue"
-      size="xl"
+      size="4rem"
       radius="xl"
       aria-label="Toggle color scheme"
     >
       {colorScheme === "dark" ? (
-        <IconSun size="1.4rem" />
+        <IconSun size="3rem" />
       ) : (
-        <IconMoon size="1.4rem" />
+        <IconMoon size="3rem" />
       )}
     </ActionIcon>
   );

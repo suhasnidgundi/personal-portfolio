@@ -19,11 +19,11 @@ export function FloatingResumeButton() {
     <ActionIcon
       variant="filled"
       color="blue"
-      size="xl"
+      size="4rem"
       radius="xl"
       aria-label="View Resume"
     >
-      <IconPdf size="1.4rem" />
+      <IconPdf size="3rem" />
     </ActionIcon>
   );
 }

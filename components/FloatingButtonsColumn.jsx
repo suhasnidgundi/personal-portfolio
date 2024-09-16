@@ -21,7 +21,7 @@ export function FloatingButtonsColumn() {
       spacing="md"
       style={{
         position: 'fixed',
-        bottom: '5em',
+        bottom: '6em',
         right: '20px',
         zIndex: 1000,
       }}
