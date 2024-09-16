@@ -5,6 +5,6 @@ export default function robots() {
       allow: "/",
       disallow: "/private/",
     },
-    sitemap: "https://suhasnidgundi.suveesoft.in/sitemap.xml",
+    sitemap: "https://suhasnidgundi.me/sitemap.xml",
   };
 }
