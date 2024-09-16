@@ -1,35 +1,59 @@
-import Header from "@/components/Header";
-import "./globals.css";
-import Footer from "@/components/Footer";
+import "@mantine/core/styles.css";
 
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 
-export const metadata = {
-  title: "",
-  description: "",
-  author: "",
-  keywords: "",
-  robots: "",
-  viewport: "",
-  themeColor: "",
-  msapplicationTileColor: "",
-  msapplicationTileImage: "",
-};
+import {
+  AppShell,
+  AppShellFooter,
+  AppShellHeader,
+  AppShellMain,
+  ColorSchemeScript, 
+  Container, 
+  MantineProvider
+} from "@mantine/core";
+import theme from "@/theme";
+
+import { HeaderSimple } from "@/components/HeaderSimple/HeaderSimple";
+import { FooterSocial } from "@/components/FooterSocial/FooterSocial";
+import HotKeysHandler from "@/components/HotKeysHandler/HotKeysHandler";
+import { FloatingButtonsColumn } from "@/components/FloatingButtonsColumn";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <ColorSchemeScript />
+      </head>
       <body>
-        <Header />
-        <div id="mainContent">
-          <div className="contentIsland">
-            <SpeedInsights />
-            {children}
-            <Analytics />
-            <Footer />
-          </div>
-        </div>
+        <MantineProvider defaultColorScheme="auto" theme={theme}>
+          {/* Hot Key Handler */}
+          <HotKeysHandler />
+
+          <AppShell>
+            {/* Header Start */}
+            <AppShellHeader>
+              <HeaderSimple />
+            </AppShellHeader>
+            {/* Header End */}
+
+            <AppShellMain>
+              <Container>
+                <SpeedInsights />
+                {children}
+                <Analytics />
+              </Container>
+            </AppShellMain>
+
+            {/* Footer Start */}
+            <AppShellFooter>
+              <FooterSocial />
+            </AppShellFooter>
+            {/* Footer End */}
+            
+            <FloatingButtonsColumn />
+          </AppShell>
+        </MantineProvider>
       </body>
     </html>
   );

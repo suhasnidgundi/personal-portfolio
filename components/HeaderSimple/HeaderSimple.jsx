@@ -1,0 +1,142 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import {
+  Container,
+  Group,
+  Burger,
+  ActionIcon,
+  useMantineColorScheme,
+  Tooltip,
+  Drawer,
+  Title,
+  Stack,
+  Text,
+  Divider,
+  Button,
+  rem,
+  ScrollArea,
+} from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import {
+  IconSun,
+  IconMoon,
+  IconPdf,
+  IconBrandGithub,
+  IconBrandLinkedin,
+} from "@tabler/icons-react";
+import classes from "./HeaderSimple.module.css";
+import Link from "next/link";
+import GradientNavTitle from "../GradientNavTitle/GradientNavTitle";
+import SocialIcons from "../social-icons/SocialIcons";
+
+const links = [
+  { link: "/aboutMe", label: "About Me" },
+  { link: "/projects", label: "Projects" },
+];
+
+export function HeaderSimple() {
+  const [opened, { toggle }] = useDisclosure(false);
+  const [drawerOpened, { open, close }] = useDisclosure(false);
+  const [active, setActive] = useState(links[0].link);
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const items = links.map((link) => (
+    <Link
+      key={link.label}
+      href={link.link}
+      className={classes.link}
+      data-active={active === link.link || undefined}
+      onClick={() => {
+        setActive(link.link);
+        close();
+      }}
+    >
+      {link.label}
+    </Link>
+  ));
+
+  const toggleColorScheme = () => {
+    const nextColorScheme = colorScheme === "dark" ? "light" : "dark";
+    setColorScheme(nextColorScheme);
+  };
+
+  if (!mounted) {
+    return null;
+  }
+
+  return (
+    <>
+      <header className={classes.header}>
+        <Container size="md" className={classes.inner}>
+          {/* <GradientNavTitle text="Suhas Nidgundi" /> */}
+          <SocialIcons />
+          <Group gap={5} visibleFrom="xs">
+            {items}
+            <Tooltip label="Change Theme">
+              <ActionIcon
+                onClick={toggleColorScheme}
+                variant="default"
+                size="lg"
+                aria-label="Toggle color scheme"
+              >
+                {colorScheme === "dark" ? (
+                  <IconSun size="1.4rem" />
+                ) : (
+                  <IconMoon size="1.4rem" />
+                )}
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label="View Resume">
+              <ActionIcon
+                variant="default"
+                size="lg"
+                aria-label="Download resume"
+              >
+                <IconPdf size="1.4rem" />
+              </ActionIcon>
+            </Tooltip>
+          </Group>
+
+          <Burger opened={opened} onClick={open} hiddenFrom="xs" size="lg" />
+        </Container>
+      </header>
+
+      <Drawer
+        opened={drawerOpened}
+        onClose={close}
+        size="100%"
+        padding="md"
+        title={<GradientNavTitle text="Suhas Nidgundi" size="2em" />}
+        className={classes.hiddenDesktop}
+      >
+        <ScrollArea h={`calc(100vh - ${rem(80)})`} mx="-md">
+          <Divider my="sm" />
+
+          <Stack spacing="xl" align="center" mt="xl">
+            {items}
+          </Stack>
+
+          <Divider my="sm" />
+
+          <Text ta="center" mt="xl" fz="lg" fw={500}>
+            Connect with me
+          </Text>
+          <Group justify="center" mt="lg">
+            <ActionIcon size="xl" variant="default" radius="xl">
+              <IconBrandGithub size="1.5rem" />
+            </ActionIcon>
+            <ActionIcon size="xl" variant="default" radius="xl">
+              <IconBrandLinkedin size="1.5rem" />
+            </ActionIcon>
+          </Group>
+        </ScrollArea>
+      </Drawer>
+    </>
+  );
+}

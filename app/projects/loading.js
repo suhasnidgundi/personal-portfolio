@@ -1,12 +1,9 @@
-import ProjectCardSkeleton from "@/components/projects/ProjectSkeleton";
+import React from 'react'
 
-const loading = () => {
+const LoadingProject = () => {
   return (
-    <>
-      <h1>Projects</h1>
-      <ProjectCardSkeleton type="reversed" />
-    </>
-  );
-};
+    <div>Loading Project ..... </div>
+  )
+}
 
-export default loading;
+export default LoadingProject
