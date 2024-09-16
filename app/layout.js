@@ -1,4 +1,5 @@
-// import "./globals.css";
+import "@mantine/core/styles.css";
+
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -7,26 +8,16 @@ import {
   AppShellFooter,
   AppShellHeader,
   AppShellMain,
-  AppShellSection,
+  ColorSchemeScript, 
+  Container, 
+  MantineProvider
 } from "@mantine/core";
-
-import "@mantine/core/styles.css";
-import { ColorSchemeScript, Container, MantineProvider } from "@mantine/core";
 import theme from "@/theme";
+
 import { HeaderSimple } from "@/components/HeaderSimple/HeaderSimple";
 import { FooterSocial } from "@/components/FooterSocial/FooterSocial";
-
-export const metadata = {
-  title: "",
-  description: "",
-  author: "",
-  keywords: "",
-  robots: "",
-  viewport: "",
-  themeColor: "",
-  msapplicationTileColor: "",
-  msapplicationTileImage: "",
-};
+import HotKeysHandler from "@/components/HotKeysHandler/HotKeysHandler";
+import { FloatingButtonsColumn } from "@/components/FloatingButtonsColumn";
 
 export default function RootLayout({ children }) {
   return (
@@ -35,27 +26,32 @@ export default function RootLayout({ children }) {
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider theme={theme}>
+        <MantineProvider defaultColorScheme="auto" theme={theme}>
+          {/* Hot Key Handler */}
+          <HotKeysHandler />
+
           <AppShell>
             {/* Header Start */}
             <AppShellHeader>
               <HeaderSimple />
             </AppShellHeader>
             {/* Header End */}
-            <AppShellSection>
-              <Container >
-                <Container >
-                  <SpeedInsights />
-                  {children}
-                  <Analytics />
-                </Container>
+
+            <AppShellMain>
+              <Container>
+                <SpeedInsights />
+                {children}
+                <Analytics />
               </Container>
-            </AppShellSection>
+            </AppShellMain>
+
             {/* Footer Start */}
             <AppShellFooter>
               <FooterSocial />
             </AppShellFooter>
             {/* Footer End */}
+            
+            <FloatingButtonsColumn />
           </AppShell>
         </MantineProvider>
       </body>

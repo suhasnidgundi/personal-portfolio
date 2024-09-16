@@ -1,6 +1,8 @@
 import { Box, Container, Flex, Text } from "@mantine/core";
 import "./page.module.css";
+import "@mantine/carousel/styles.css";
 import Link from "next/link";
+import ProjectCarousel from "@/components/ProjectCarousel/ProjectCarousel";
 
 export const metadata = {
   title: "Home - Personal Portfolio",
@@ -9,45 +11,51 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <Box style={{ marginTop: "5em" }}>
-      <Box style={{ height: "4em" }}></Box>
-      <Flex justify="flex-start" direction="column" gap={10}>
-        <Text fz={"xl"}>Hello World! My name is</Text>
+    <>
+      <Box my="xl">
+        <Box style={{ height: "4em" }}></Box>
+        <Flex justify="flex-start" direction="column" gap={10}>
+          <Text fz={"xl"}>Hello World! My name is</Text>
 
-        <Box
-          style={{
-            display: "inline-block",
-          }}
-        >
-          <Text
-            variant="gradient"
-            gradient={{ from: "blue", to: "pink" }}
-            size="7rem"
-            weight={700}
-            style={{ display: "inline" }}
+          <Box
+            style={{
+              display: "inline-block",
+            }}
           >
-            Suhas Nidgundi
-          </Text>
-        </Box>
-        <Text fz={"xl"}>and I am an </Text>
+            <Text
+              variant="gradient"
+              gradient={{ from: "blue", to: "pink" }}
+              size="7rem"
+              weight={700}
+              style={{ display: "inline" }}
+            >
+              Suhas Nidgundi
+            </Text>
+          </Box>
+          <Text fz={"xl"}>and I am an </Text>
 
-        <Box
-          style={{
-            display: "inline-block",
-          }}
-        >
-          <Text
-            variant="gradient"
-            gradient={{ from: "blue", to: "pink" }}
-            size="4em"
-            // fz="3em"
-            weight={700}
-            style={{ display: "inline" }}
+          <Box
+            style={{
+              display: "inline-block",
+            }}
           >
-            Engineer
-          </Text>
-        </Box>
-      </Flex>
-    </Box>
+            <Text
+              variant="gradient"
+              gradient={{ from: "blue", to: "pink" }}
+              size="4em"
+              // fz="3em"
+              weight={700}
+              style={{ display: "inline" }}
+            >
+              Engineer
+            </Text>
+          </Box>
+        </Flex>
+        {/* <ProjectCarousel /> */}
+      </Box>
+
+      <br />
+      <br />
+    </>
   );
 }
