@@ -12,19 +12,19 @@ const SocialIcons = () => {
   return (
     <>
       <Flex>
-        <ActionIcon size="xl" color="gray" variant="subtle">
+        <ActionIcon size="2.5rem" color="gray" variant="subtle">
           <IconBrandLinkedin
             style={{ width: rem(50), height: rem(50) }}
             stroke={1.5}
           />
         </ActionIcon>
-        <ActionIcon size="xl" color="gray" variant="subtle">
+        <ActionIcon size="2.5rem" color="gray" variant="subtle">
           <IconBrandGithub
             style={{ width: rem(50), height: rem(50) }}
             stroke={1.5}
           />
         </ActionIcon>
-        <ActionIcon size="xl" color="gray" variant="subtle">
+        <ActionIcon size="2.5rem" color="gray" variant="subtle">
           <IconBrandInstagram
             style={{ width: rem(50), height: rem(50) }}
             stroke={1.5}

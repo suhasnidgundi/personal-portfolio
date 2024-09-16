@@ -52,6 +52,7 @@ export function HeaderSimple() {
       href={link.link}
       className={classes.link}
       data-active={active === link.link || undefined}
+      style={{fontSize:"1.5em"}}
       onClick={() => {
         setActive(link.link);
         close();
@@ -82,23 +83,23 @@ export function HeaderSimple() {
               <ActionIcon
                 onClick={toggleColorScheme}
                 variant="default"
-                size="lg"
+                size="2.5em"
                 aria-label="Toggle color scheme"
               >
                 {colorScheme === "dark" ? (
-                  <IconSun size="1.4rem" />
+                  <IconSun size="2rem" />
                 ) : (
-                  <IconMoon size="1.4rem" />
+                  <IconMoon size="2rem" />
                 )}
               </ActionIcon>
             </Tooltip>
             <Tooltip label="View Resume">
               <ActionIcon
                 variant="default"
-                size="lg"
+                size="2.5rem"
                 aria-label="Download resume"
               >
-                <IconPdf size="1.4rem" />
+                <IconPdf size="2rem" />
               </ActionIcon>
             </Tooltip>
           </Group>
@@ -112,7 +113,7 @@ export function HeaderSimple() {
         onClose={close}
         size="100%"
         padding="md"
-        title={<GradientNavTitle text="Suhas Nidgundi" size="2em" />}
+        title={<GradientNavTitle text="Suhas Nidgundi" size="2.5em" />}
         className={classes.hiddenDesktop}
       >
         <ScrollArea h={`calc(100vh - ${rem(80)})`} mx="-md">
@@ -128,11 +129,11 @@ export function HeaderSimple() {
             Connect with me
           </Text>
           <Group justify="center" mt="lg">
-            <ActionIcon size="xl" variant="default" radius="xl">
-              <IconBrandGithub size="1.5rem" />
+            <ActionIcon size="4rem" variant="default" radius="xl">
+              <IconBrandGithub size="3rem" />
             </ActionIcon>
-            <ActionIcon size="xl" variant="default" radius="xl">
-              <IconBrandLinkedin size="1.5rem" />
+            <ActionIcon size="4rem" variant="default" radius="xl">
+              <IconBrandLinkedin size="3rem" />
             </ActionIcon>
           </Group>
         </ScrollArea>
