@@ -20,45 +20,52 @@ import HotKeysHandler from "@/components/HotKeysHandler/HotKeysHandler";
 import { FloatingButtonsColumn } from "@/components/FloatingButtonsColumn";
 import NetworkOSInfo from "@/components/NetworkOSInfo";
 import { ModalsProvider } from "@mantine/modals";
+import { RootStyleRegistry } from "./EmotionRootStyleRegistry";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
         <ColorSchemeScript />
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
+        />
       </head>
       <body>
-        <MantineProvider defaultColorScheme="auto" theme={theme}>
-          <ModalsProvider>
-            {/* Hot Key Handler */}
-            <HotKeysHandler />
-            <NetworkOSInfo />
+        <RootStyleRegistry>
+          <MantineProvider defaultColorScheme="auto" theme={theme}>
+            <ModalsProvider>
+              {/* Hot Key Handler */}
+              <HotKeysHandler />
+              <NetworkOSInfo />
 
-            <AppShell>
-              {/* Header Start */}
-              <AppShellHeader>
-                <HeaderSimple />
-              </AppShellHeader>
-              {/* Header End */}
+              <AppShell>
+                {/* Header Start */}
+                <AppShellHeader>
+                  <HeaderSimple />
+                </AppShellHeader>
+                {/* Header End */}
 
-              <AppShellMain>
-                <Container>
-                  <SpeedInsights />
-                  {children}
-                  <Analytics />
-                </Container>
-              </AppShellMain>
+                <AppShellMain>
+                  <Container>
+                    <SpeedInsights />
+                    {children}
+                    <Analytics />
+                  </Container>
+                </AppShellMain>
 
-              {/* Footer Start */}
-              <AppShellFooter>
-                <FooterSocial />
-              </AppShellFooter>
-              {/* Footer End */}
+                {/* Footer Start */}
+                <AppShellFooter>
+                  <FooterSocial />
+                </AppShellFooter>
+                {/* Footer End */}
 
-              <FloatingButtonsColumn />
-            </AppShell>
-          </ModalsProvider>
-        </MantineProvider>
+                <FloatingButtonsColumn />
+              </AppShell>
+            </ModalsProvider>
+          </MantineProvider>
+        </RootStyleRegistry>
       </body>
     </html>
   );

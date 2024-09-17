@@ -1,13 +1,16 @@
 import "./page.module.css";
 import "@mantine/carousel/styles.css";
-
 import { Box, Flex, Text } from "@mantine/core";
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
 
-import ProjectCarousel from "@/components/ProjectCarousel/ProjectCarousel";
+const DynamicProjectCarousel = dynamic(() => import('@/components/ProjectCarousel/ProjectCarousel'), {
+  loading: () => <p>Loading projects...</p>,
+});
 
 export const metadata = {
-  title: "",
-  description: "",
+  title: "Your Name - Engineer Portfolio",
+  description: "Portfolio showcasing engineering projects and skills of Your Name",
 };
 
 export default function Home() {
@@ -17,12 +20,7 @@ export default function Home() {
         <Box style={{ height: "4em" }}></Box>
         <Flex justify="flex-start" direction="column" gap={10}>
           <Text fz={"xl"}>Hello World! My name is</Text>
-
-          <Box
-            style={{
-              display: "inline-block",
-            }}
-          >
+          <Box style={{ display: "inline-block" }}>
             <Text
               variant="gradient"
               gradient={{ from: "blue", to: "pink" }}
@@ -34,17 +32,11 @@ export default function Home() {
             </Text>
           </Box>
           <Text fz={"xl"}>and I am an </Text>
-
-          <Box
-            style={{
-              display: "inline-block",
-            }}
-          >
+          <Box style={{ display: "inline-block" }}>
             <Text
               variant="gradient"
               gradient={{ from: "blue", to: "pink" }}
               size="4em"
-              // fz="3em"
               weight={700}
               style={{ display: "inline" }}
             >
@@ -52,7 +44,9 @@ export default function Home() {
             </Text>
           </Box>
         </Flex>
-        <ProjectCarousel />
+        <Suspense fallback={<div>Loading projects...</div>}>
+          <DynamicProjectCarousel />
+        </Suspense>
       </Box>
     </>
   );
