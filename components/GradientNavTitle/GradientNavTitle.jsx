@@ -29,22 +29,20 @@ const GradientNavTitle = ({ text, order = 2, size = "2em" }) => {
   }, []);
 
   return (
-    <Link href="/" style={{ textDecoration: "none" }}>
-      <Title
-        ref={titleRef}
-        order={order}
-        style={{
-          fontSize: size,
-          backgroundClip: "text",
-          textFillColor: "transparent",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          transition: "all 1s ease-in-out",
-        }}
-      >
-        {text}
-      </Title>
-    </Link>
+    <Title
+      ref={titleRef}
+      order={order}
+      style={{
+        fontSize: size,
+        backgroundClip: "text",
+        textFillColor: "transparent",
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        transition: "all 1s ease-in-out",
+      }}
+    >
+      {text}
+    </Title>
   );
 };
 

@@ -29,8 +29,10 @@ import classes from "./HeaderSimple.module.css";
 import Link from "next/link";
 import GradientNavTitle from "../GradientNavTitle/GradientNavTitle";
 import SocialIcons from "../social-icons/SocialIcons";
+import { IconBrandInstagram } from "@tabler/icons-react";
 
 const links = [
+  { link: "/", label: "Home" },
   { link: "/aboutMe", label: "About Me" },
   { link: "/projects", label: "Projects" },
 ];
@@ -134,6 +136,9 @@ export function HeaderSimple() {
             </ActionIcon>
             <ActionIcon size="4rem" variant="default" radius="xl">
               <IconBrandLinkedin size="3rem" />
+            </ActionIcon>
+            <ActionIcon size="4rem" variant="default" radius="xl">
+              <IconBrandInstagram size="3rem" />
             </ActionIcon>
           </Group>
         </ScrollArea>
