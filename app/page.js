@@ -1,10 +1,12 @@
-import { Box, Flex, Text } from "@mantine/core";
 import "./page.module.css";
 import "@mantine/carousel/styles.css";
+
+import { Box, Flex, Text } from "@mantine/core";
+
 import ProjectCarousel from "@/components/ProjectCarousel/ProjectCarousel";
 
 export const metadata = {
-  title: "Home - Personal Portfolio",
+  title: "",
   description: "",
 };
 
@@ -13,12 +15,7 @@ export default function Home() {
     <>
       <Box my="5em">
         <Box style={{ height: "4em" }}></Box>
-        <Flex
-          justify="flex-start"
-        
-          direction="column"
-          gap={10}
-        >
+        <Flex justify="flex-start" direction="column" gap={10}>
           <Text fz={"xl"}>Hello World! My name is</Text>
 
           <Box
