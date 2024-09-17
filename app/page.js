@@ -9,8 +9,8 @@ const DynamicProjectCarousel = dynamic(() => import('@/components/ProjectCarouse
 });
 
 export const metadata = {
-  title: "Your Name - Engineer Portfolio",
-  description: "Portfolio showcasing engineering projects and skills of Your Name",
+  title: "Suhas Nidgundi - Portfolio ",
+  description: "",
 };
 
 export default function Home() {
