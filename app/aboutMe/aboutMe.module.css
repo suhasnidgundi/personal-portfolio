@@ -1,0 +1,35 @@
+.imageWrapper {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.imageWrapper::before,
+.imageWrapper::after {
+    content: '';
+    position: absolute;
+    left: -150%;
+    top: -150%;
+    width: 400%;
+    height: 400%;
+    background-color: rgba(255, 255, 255, 0.3);
+    animation: cloud 25s linear infinite;
+}
+
+.imageWrapper::after {
+    animation-duration: 35s;
+    animation-direction: reverse;
+    opacity: 0.5;
+}
+
+@keyframes cloud {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+
+    100% {
+        transform: translateX(25%) translateY(25%);
+    }
+}
