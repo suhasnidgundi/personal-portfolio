@@ -1,37 +1,54 @@
 import React from "react";
 import { ActionIcon, Flex, rem } from "@mantine/core";
-import { IconBrandYoutube } from "@tabler/icons-react";
-import { IconBrandInstagram } from "@tabler/icons-react";
-import { IconBrandTwitter } from "@tabler/icons-react";
-import { IconBrandGithub } from "@tabler/icons-react";
-import { IconBrandLinkedin } from "@tabler/icons-react";
+import {
+  IconBrandInstagram,
+  IconBrandGithub,
+  IconBrandLinkedin,
+} from "@tabler/icons-react";
 
-const margin = 2;
+const SocialIcon = ({ IconComponent, size, color, variant, stroke }) => {
+  return (
+    <ActionIcon size={size} color={color} variant={variant}>
+      <IconComponent
+        style={{ width: rem(size), height: rem(size) }}
+        stroke={stroke}
+      />
+    </ActionIcon>
+  );
+};
+
+const socialLinks = [
+  {
+    IconComponent: IconBrandLinkedin,
+    url: "https://www.linkedin.com/in/suhasnidgundi",
+  },
+  { IconComponent: IconBrandGithub, url: "https://github.com/suhasnidgundi" },
+  {
+    IconComponent: IconBrandInstagram,
+    url: "https://www.instagram.com/suhasnidgundi",
+  },
+];
 
 const SocialIcons = () => {
   return (
-    <>
-      <Flex>
-        <ActionIcon size="2.5rem" color="gray" variant="subtle">
-          <IconBrandLinkedin
-            style={{ width: rem(50), height: rem(50) }}
+    <Flex>
+      {socialLinks.map((link, index) => (
+        <a
+          key={index}
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <SocialIcon
+            IconComponent={link.IconComponent}
+            size="2.5rem"
+            color="gray"
+            variant="subtle"
             stroke={1.5}
           />
-        </ActionIcon>
-        <ActionIcon size="2.5rem" color="gray" variant="subtle">
-          <IconBrandGithub
-            style={{ width: rem(50), height: rem(50) }}
-            stroke={1.5}
-          />
-        </ActionIcon>
-        <ActionIcon size="2.5rem" color="gray" variant="subtle">
-          <IconBrandInstagram
-            style={{ width: rem(50), height: rem(50) }}
-            stroke={1.5}
-          />
-        </ActionIcon>
-      </Flex>
-    </>
+        </a>
+      ))}
+    </Flex>
   );
 };
 

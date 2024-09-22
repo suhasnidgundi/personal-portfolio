@@ -100,6 +100,8 @@ export function HeaderSimple() {
                 variant="default"
                 size="2.5rem"
                 aria-label="Download resume"
+                component={Link}
+                href="/resume/SuhasNidgundi_Resume.pdf"
               >
                 <IconPdf size="2rem" />
               </ActionIcon>
@@ -131,15 +133,7 @@ export function HeaderSimple() {
             Connect with me
           </Text>
           <Group justify="center" mt="lg">
-            <ActionIcon size="4rem" variant="default" radius="xl">
-              <IconBrandGithub size="3rem" />
-            </ActionIcon>
-            <ActionIcon size="4rem" variant="default" radius="xl">
-              <IconBrandLinkedin size="3rem" />
-            </ActionIcon>
-            <ActionIcon size="4rem" variant="default" radius="xl">
-              <IconBrandInstagram size="3rem" />
-            </ActionIcon>
+            <SocialIcons size="4rem" variant="default" radius="xl" />
           </Group>
         </ScrollArea>
       </Drawer>
