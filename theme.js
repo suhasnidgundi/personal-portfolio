@@ -21,18 +21,16 @@ const theme = createTheme({
     fontFamily: '"Montserrat", sans-serif',
     fontWeight: 700,
     sizes: {
-      h1: { fontSize: "27pt" },
+      h1: { fontSize: "6vh" },
       h2: { fontSize: "19pt" },
       h3: { fontSize: "16pt" },
       h4: { fontSize: "13pt" },
+      h5: { fontSize: "13pt" },
+      h6: { fontSize: "13pt" },
     },
   },
   colors: {
     color,
-  },
-  other: {
-    skeletonBaseColor: "#e0e0e0",
-    skeletonHighlightColor: "#f0f0f0",
   },
 });
 

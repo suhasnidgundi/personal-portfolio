@@ -12,14 +12,15 @@ import {
   Container,
   MantineProvider,
 } from "@mantine/core";
+import { ModalsProvider } from "@mantine/modals";
+
 import theme from "@/theme";
+import HotKeysHandler from "@/components/HotKeysHandler/HotKeysHandler";
 
 import { HeaderSimple } from "@/components/HeaderSimple/HeaderSimple";
 import { FooterSocial } from "@/components/FooterSocial/FooterSocial";
-import HotKeysHandler from "@/components/HotKeysHandler/HotKeysHandler";
 import { FloatingButtonsColumn } from "@/components/FloatingButtonsColumn";
 import NetworkOSInfo from "@/components/NetworkOSInfo";
-import { ModalsProvider } from "@mantine/modals";
 import { RootStyleRegistry } from "./EmotionRootStyleRegistry";
 
 export default function RootLayout({ children }) {
@@ -48,7 +49,7 @@ export default function RootLayout({ children }) {
                 {/* Header End */}
 
                 <AppShellMain>
-                  <Container>
+                  <Container size="xl" my="5rem">
                     <SpeedInsights />
                     {children}
                     <Analytics />
