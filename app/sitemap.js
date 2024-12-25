@@ -7,7 +7,7 @@ export default function sitemap() {
       priority: 1,
     },
     {
-      url: "https://suhasnidgundi.me/aboutMe",
+      url: "https://suhasnidgundi.me/about",
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,

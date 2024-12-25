@@ -49,7 +49,7 @@ export default function RootLayout({ children }) {
                 {/* Header End */}
 
                 <AppShellMain>
-                  <Container size="xl" my="5rem">
+                  <Container size="lg" my="5rem">
                     <SpeedInsights />
                     {children}
                     <Analytics />

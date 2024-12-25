@@ -33,7 +33,7 @@ import { IconBrandInstagram } from "@tabler/icons-react";
 
 const links = [
   { link: "/", label: "Home" },
-  { link: "/aboutMe", label: "About Me" },
+  { link: "/about", label: "About Me" },
   { link: "/projects", label: "Projects" },
 ];
 
@@ -54,7 +54,7 @@ export function HeaderSimple() {
       href={link.link}
       className={classes.link}
       data-active={active === link.link || undefined}
-      style={{fontSize:"1.5em"}}
+      style={{ fontSize: "1.5em" }}
       onClick={() => {
         setActive(link.link);
         close();
@@ -76,7 +76,7 @@ export function HeaderSimple() {
   return (
     <>
       <header className={classes.header}>
-        <Container size="xl" className={classes.inner}>
+        <Container size="lg" className={classes.inner}>
           {/* <GradientNavTitle text="Suhas Nidgundi" /> */}
           <SocialIcons />
           <Group gap={5} visibleFrom="xs">
@@ -100,6 +100,7 @@ export function HeaderSimple() {
                 variant="default"
                 size="2.5rem"
                 aria-label="Download resume"
+                onClick={() => { document.location.href = "/resume.pdf";  }}
               >
                 <IconPdf size="2rem" />
               </ActionIcon>
