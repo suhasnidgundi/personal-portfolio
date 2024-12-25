@@ -100,7 +100,7 @@ export function HeaderSimple() {
                 variant="default"
                 size="2.5rem"
                 aria-label="Download resume"
-                onClick={() => { document.location.href = "/resume.pdf";  }}
+                onClick={() => { document.location.href = "/resume.pdf"; }}
               >
                 <IconPdf size="2rem" />
               </ActionIcon>
@@ -132,13 +132,13 @@ export function HeaderSimple() {
             Connect with me
           </Text>
           <Group justify="center" mt="lg">
-            <ActionIcon size="4rem" variant="default" radius="xl">
+            <ActionIcon size="4rem" variant="default" radius="xl" onClick={() => { document.location.href = "https://github.com/suhasnidgundi/"; }}>
               <IconBrandGithub size="3rem" />
             </ActionIcon>
-            <ActionIcon size="4rem" variant="default" radius="xl">
+            <ActionIcon size="4rem" variant="default" radius="xl" onClick={() => { document.location.href = "https://www.linkedin.com/in/suhasnidgundi/"; }}>
               <IconBrandLinkedin size="3rem" />
             </ActionIcon>
-            <ActionIcon size="4rem" variant="default" radius="xl">
+            <ActionIcon size="4rem" variant="default" radius="xl" onClick={() => { document.location.href = "https://www.instagram.com/suhasnidgundi"; }}>
               <IconBrandInstagram size="3rem" />
             </ActionIcon>
           </Group>

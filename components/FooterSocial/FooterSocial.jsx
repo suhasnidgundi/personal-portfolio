@@ -24,7 +24,7 @@ export function FooterSocial() {
             mantine.dev
           </Link>
           . Check out the source code on{" "}
-          <Link href="" style={{ textDecoration: "none" }}>
+          <Link href="https://github.com/suhasnidgundi/personal-portfolio.git" style={{ textDecoration: "none" }}>
             Github
           </Link>
           . © 2024 Suhas Nidgundi
