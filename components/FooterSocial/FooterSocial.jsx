@@ -6,6 +6,9 @@ import classes from "./FooterSocial.module.css";
 import Link from "next/link";
 
 export function FooterSocial() {
+
+  const currentYear = new Date().getFullYear();
+
   return (
     <div className={classes.footer}>
       <Container
@@ -27,7 +30,7 @@ export function FooterSocial() {
           <Link href="https://github.com/suhasnidgundi/personal-portfolio.git" style={{ textDecoration: "none" }}>
             Github
           </Link>
-          . © 2024 Suhas Nidgundi
+          . © {currentYear} Suhas Nidgundi
         </Text>
       </Container>
     </div>
