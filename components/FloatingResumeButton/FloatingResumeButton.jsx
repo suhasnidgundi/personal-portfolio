@@ -22,6 +22,7 @@ export function FloatingResumeButton() {
       size="4rem"
       radius="xl"
       aria-label="View Resume"
+      onClick={() => { document.location.href = "/resume.pdf"; }}
     >
       <IconPdf size="3rem" />
     </ActionIcon>
