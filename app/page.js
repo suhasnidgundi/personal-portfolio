@@ -1,4 +1,4 @@
-import { Container, Text, Title, Image, Flex } from '@mantine/core';
+import { Container, Text, Title, Flex } from '@mantine/core';
 import Link from 'next/link';
 
 const Home = () => {
@@ -34,7 +34,7 @@ const Home = () => {
           /> */}
           <Title
             order={1}
-            fz={{ base: '1.5rem', md: '6rem' }}
+            fz={{ base: '3rem', md: '6rem' }}
             fw={400}
             style={{ letterSpacing: '-0.02em' }}
           >
@@ -48,7 +48,7 @@ const Home = () => {
           w="fit-content"
         >
           <Text
-            fz={{ base: '1rem', md: '2rem' }}
+            fz={{ base: '1.2rem', md: '2rem' }}
             lh={1.6}
             fw={300}
             maw="120rem"

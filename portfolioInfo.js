@@ -18,7 +18,7 @@ export const portfolio = {
     },
     {
       name: "Instagram",
-      url: "https://www.instagram.com/suhasnidgundi/",
+      url: "https://www.instagram.com/just.another.suhas",
       image: "/images/instagram_icon.png",
     },
     {

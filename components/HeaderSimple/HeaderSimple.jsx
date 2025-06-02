@@ -9,11 +9,9 @@ import {
   useMantineColorScheme,
   Tooltip,
   Drawer,
-  Title,
   Stack,
   Text,
   Divider,
-  Button,
   rem,
   ScrollArea,
 } from "@mantine/core";
@@ -24,12 +22,12 @@ import {
   IconPdf,
   IconBrandGithub,
   IconBrandLinkedin,
+  IconBrandInstagram
 } from "@tabler/icons-react";
 import classes from "./HeaderSimple.module.css";
 import Link from "next/link";
 import GradientNavTitle from "../GradientNavTitle/GradientNavTitle";
 import SocialIcons from "../social-icons/SocialIcons";
-import { IconBrandInstagram } from "@tabler/icons-react";
 
 const links = [
   { link: "/", label: "Home" },
@@ -138,7 +136,7 @@ export function HeaderSimple() {
             <ActionIcon size="4rem" variant="default" radius="xl" onClick={() => { document.location.href = "https://www.linkedin.com/in/suhasnidgundi/"; }}>
               <IconBrandLinkedin size="3rem" />
             </ActionIcon>
-            <ActionIcon size="4rem" variant="default" radius="xl" onClick={() => { document.location.href = "https://www.instagram.com/suhasnidgundi"; }}>
+            <ActionIcon size="4rem" variant="default" radius="xl" onClick={() => { document.location.href = "https://www.instagram.com/just.another.suhas"; }}>
               <IconBrandInstagram size="3rem" />
             </ActionIcon>
           </Group>
