@@ -33,14 +33,14 @@ export default function AboutPage() {
                 Software Engineer & Developer passionate about creating impactful digital experiences
               </Text>
               <Text>
-                Hello! I'm Suhas Nidgundi, a software engineer with expertise in modern web technologies.
+                Hello! I&apos;m Suhas Nidgundi, a software engineer with expertise in modern web technologies.
                 I specialize in building responsive and performant applications using React, Next.js, and various
                 backend technologies. With a strong foundation in both design and development,
                 I create solutions that are not only functional but also deliver exceptional user experiences.
               </Text>
               <Text>
                 My approach combines technical excellence with creative problem-solving, allowing me to
-                tackle complex challenges and turn innovative ideas into reality. I'm constantly learning
+                tackle complex challenges and turn innovative ideas into reality. I&apos;m constantly learning
                 and exploring new technologies to stay at the forefront of the rapidly evolving tech landscape.
               </Text>
             </Stack>
@@ -257,7 +257,7 @@ export default function AboutPage() {
         <Stack spacing="md">
           <Title order={2}>My Setup</Title>
           <Text>
-            Every developer has their unique workspace. Here's my current setup that powers my projects:
+            Every developer has their unique workspace. Here&apos;s my current setup that powers my projects:
           </Text>
 
           <Grid>
