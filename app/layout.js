@@ -24,6 +24,7 @@ import NetworkOSInfo from "@/components/NetworkOSInfo";
 import { RootStyleRegistry } from "./EmotionRootStyleRegistry";
 
 export default function RootLayout({ children }) {
+
   return (
     <html lang="en">
       <head>
@@ -67,6 +68,8 @@ export default function RootLayout({ children }) {
             </ModalsProvider>
           </MantineProvider>
         </RootStyleRegistry>
+
+
       </body>
     </html>
   );

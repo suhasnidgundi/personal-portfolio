@@ -1,143 +1,66 @@
 "use client";
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
-  Box,
   Container,
   Title,
   Text,
   SimpleGrid,
   Card,
-  Image,
-  Group,
   Badge,
+  Group,
   ActionIcon,
+  Box,
   Tabs,
-} from "@mantine/core";
-import { IconBrandGithub, IconExternalLink, IconCode } from "@tabler/icons-react";
-import './projects.module.css';
-
-// Project data
-const projects = [
-  {
-    id: "personal-portfolio",
-    title: "Personal Portfolio",
-    description: "A modern portfolio website built with Next.js and Mantine UI, featuring a clean design, dark mode support, and responsive layout.",
-    image: "/images/portfolio.jpg",
-    video: null,
-    tags: ["Next.js", "Mantine", "React"],
-    links: {
-      github: "https://github.com/suhasnidgundi/personal-portfolio",
-      demo: "https://suhasnidgundi.com"
-    }
-  },
-  {
-    id: "soft-body-simulation",
-    title: "2D Soft Body Simulation",
-    description: "Cross-platform Soft Body Simulator in Python utilizing spring-mass and pressure forces models for realistic physics simulations.",
-    image: "/images/simulation-thumb.jpg",
-    video: "/videos/10x10.mp4",
-    tags: ["Python", "Taichi", "Physics"],
-    links: {
-      github: "https://github.com/suhasnidgundi/2d-softbody-simulations",
-      demo: null
-    }
-  },
-  {
-    id: "ecommerce-platform",
-    title: "E-Commerce Platform",
-    description: "Full-stack e-commerce solution with modern UI/UX, secure payment integration, and real-time inventory management.",
-    image: "/images/ecommerce.jpg",
-    video: null,
-    tags: ["React", "Node.js", "MongoDB"],
-    links: {
-      github: "https://github.com/suhasnidgundi/ecommerce-platform",
-      demo: "https://example-ecommerce.com"
-    }
-  },
-  {
-    id: "task-management",
-    title: "Task Management Dashboard",
-    description: "Collaborative project management tool with drag-and-drop functionality, team collaboration features, and progress tracking.",
-    image: "/images/tasks.jpg",
-    video: null,
-    tags: ["Next.js", "TypeScript", "Prisma"],
-    links: {
-      github: "https://github.com/suhasnidgundi/task-dashboard",
-      demo: "https://task-manager-demo.com"
-    }
-  },
-  {
-    id: "weather-analytics",
-    title: "Weather Analytics App",
-    description: "Real-time weather monitoring application with data visualization, location-based forecasts, and historical weather data analysis.",
-    image: "/images/weather.jpg",
-    video: null,
-    tags: ["React", "D3.js", "Weather API"],
-    links: {
-      github: "https://github.com/suhasnidgundi/weather-app",
-      demo: "https://weather-analytics.com"
-    }
-  },
-  {
-    id: "crypto-tracker",
-    title: "Cryptocurrency Tracker",
-    description: "Real-time cryptocurrency price tracking with portfolio management, price alerts, and market analysis tools for investors.",
-    image: "/images/crypto.jpg",
-    video: null,
-    tags: ["React Native", "Redux", "Firebase"],
-    links: {
-      github: "https://github.com/suhasnidgundi/crypto-tracker",
-      demo: "https://crypto-tracker-demo.com"
-    }
-  }
-];
+  Loader,
+  Center,
+  Alert
+} from '@mantine/core';
+import {
+  IconBrandGithub,
+  IconExternalLink,
+  IconCode,
+  IconAlertCircle
+} from '@tabler/icons-react';
+import { useProjects } from '@/hooks/useProjects';
 
 const ProjectCard = ({ project }) => {
-  const [mediaType, setMediaType] = useState(project.video ? 'video' : 'image');
+  const [mediaType, setMediaType] = useState('image');
 
   return (
-    <Card shadow="sm" padding="lg" radius="md" withBorder style={{
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100%',
-      border: '1px solid var(--mantine-color-dark-4)',
-      background: 'var(--mantine-color-dark-7)',
-      transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-    }}
-      className="project-card"
-    >
+    <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Card.Section>
-        {mediaType === 'video' && project.video ? (
+        {project.image && mediaType === 'image' && (
+          <img
+            src={project.image}
+            alt={project.title}
+            style={{
+              width: '100%',
+              height: '200px',
+              objectFit: 'cover'
+            }}
+          />
+        )}
+        {project.video && mediaType === 'video' && (
           <video
+            src={project.video}
+            style={{
+              width: '100%',
+              height: '200px',
+              objectFit: 'cover'
+            }}
             autoPlay
             loop
             muted
-            style={{
-              width: '100%',
-              height: '220px',
-              objectFit: 'cover',
-              borderBottom: '1px solid var(--mantine-color-dark-4)'
-            }}
-          >
-            <source src={project.video} type="video/mp4" />
-          </video>
-        ) : (
-          <Image
-            src={project.image}
-            height={220}
-            alt={project.title}
-            style={{
-              objectFit: 'cover',
-              borderBottom: '1px solid var(--mantine-color-dark-4)'
-            }}
           />
         )}
       </Card.Section>
 
       <Box pt="md" pb="md" style={{ flex: 1 }}>
         <Group justify="space-between" mb={8}>
-          <Title order={3} size="h4" fw={500} lineClamp={1}>{project.title}</Title>
+          <Title order={3} size="h4" fw={500} lineClamp={1}>
+            {project.title}
+          </Title>
         </Group>
 
         <Text size="sm" c="dimmed" lineClamp={3} mb="md" style={{ flex: 1 }}>
@@ -145,7 +68,7 @@ const ProjectCard = ({ project }) => {
         </Text>
 
         <Group mt="auto">
-          {project.tags.map((tag) => (
+          {project.tags?.map((tag) => (
             <Badge key={tag} size="sm" variant="light" radius="sm">
               {tag}
             </Badge>
@@ -153,8 +76,14 @@ const ProjectCard = ({ project }) => {
         </Group>
       </Box>
 
-      <Group gap="xs" justify="flex-end" mt="auto" pt="xs" style={{ borderTop: '1px solid var(--mantine-color-dark-4)' }}>
-        {project.links.github && (
+      <Group
+        gap="xs"
+        justify="flex-end"
+        mt="auto"
+        pt="xs"
+        style={{ borderTop: '1px solid var(--mantine-color-dark-4)' }}
+      >
+        {project.links?.github && (
           <ActionIcon
             component="a"
             href={project.links.github}
@@ -167,7 +96,7 @@ const ProjectCard = ({ project }) => {
             <IconBrandGithub size={18} />
           </ActionIcon>
         )}
-        {project.links.demo && (
+        {project.links?.demo && (
           <ActionIcon
             component="a"
             href={project.links.demo}
@@ -196,15 +125,34 @@ const ProjectCard = ({ project }) => {
 };
 
 const Projects = () => {
+  const { projects, loading, error, getProjectsByTag, getAllTags } = useProjects();
   const [activeTab, setActiveTab] = useState('all');
 
   // Get unique tags from all projects
-  const allTags = ['all', ...new Set(projects.flatMap(project => project.tags))];
+  const allTags = ['all', ...getAllTags()];
 
   // Filter projects based on active tag
-  const filteredProjects = activeTab === 'all'
-    ? projects
-    : projects.filter(project => project.tags.includes(activeTab));
+  const filteredProjects = getProjectsByTag(activeTab);
+
+  if (loading) {
+    return (
+      <Container size="lg" py={40}>
+        <Center>
+          <Loader size="xl" />
+        </Center>
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container size="lg" py={40}>
+        <Alert icon={<IconAlertCircle size={16} />} title="Error" color="red">
+          Failed to load projects: {error}
+        </Alert>
+      </Container>
+    );
+  }
 
   return (
     <Container size="lg" py={40}>
@@ -236,6 +184,14 @@ const Projects = () => {
           <ProjectCard key={project.id} project={project} />
         ))}
       </SimpleGrid>
+
+      {filteredProjects.length === 0 && (
+        <Center>
+          <Text c="dimmed" size="lg">
+            No projects found for the selected category.
+          </Text>
+        </Center>
+      )}
     </Container>
   );
 };
