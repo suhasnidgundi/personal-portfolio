@@ -1,3 +1,10 @@
 .adminShell :global(.mantine-AppShell-main) {
     padding: 0 !important;
 }
+
+
+/* Remove extra spacing from the main content area */
+.adminShell :global(.mantine-AppShell-main)>* {
+    padding-top: 0 !important;
+}
+

@@ -1,4 +1,5 @@
 "use client";
+import "./page.module.css";
 
 import React, { useState, useMemo } from 'react';
 import {
@@ -21,15 +22,13 @@ import {
   Box,
   Stack,
   Paper,
-  Flex,
   Select,
   Tooltip,
   Card,
   ThemeIcon,
   SimpleGrid,
   Center,
-  RingProgress,
-  Modal // Add Modal import here
+  Modal
 } from '@mantine/core';
 import {
   IconPlus,
@@ -43,14 +42,10 @@ import {
   IconFilter,
   IconDownload,
   IconUpload,
-  IconStar,
   IconStarFilled,
-  IconCalendar,
   IconCode,
   IconExternalLink,
   IconBrandGithub,
-  IconChartBar,
-  IconUsers,
   IconTrendingUp
 } from '@tabler/icons-react';
 import { DataTable } from 'mantine-datatable';
@@ -483,9 +478,10 @@ const AdminProjects = () => {
           setSelectedRecords([]);
           refetch();
         } catch (error) {
+          console.error('Bulk delete error:', error);
           notifications.show({
             title: 'Error',
-            message: 'Failed to delete some projects',
+            message: error.message || 'Failed to delete some projects',
             color: 'red',
             icon: <IconX size={16} />
           });
@@ -521,7 +517,7 @@ const AdminProjects = () => {
 
   if (loading) {
     return (
-      <Container size="xl" py={40}>
+      <Container size="xl" py={20}>
         <Center>
           <Stack align="center" gap="md">
             <Loader size="xl" />
@@ -534,7 +530,7 @@ const AdminProjects = () => {
 
   if (error) {
     return (
-      <Container size="xl" py={40}>
+      <Container size="xl" py={20}>
         <Alert icon={<IconAlertCircle size={16} />} title="Error" color="red">
           Failed to load projects: {error}
         </Alert>
@@ -542,8 +538,12 @@ const AdminProjects = () => {
     );
   }
 
+  // Check if there are projects
+  const hasProjects = projects && projects.length > 0;
+  const hasFilteredProjects = filteredProjects.length > 0;
+
   return (
-    <Container size="xl" py={40}>
+    <Container size="xl" >
       {/* Header */}
       <Group justify="space-between" mb="xl">
         <Box>
@@ -559,7 +559,6 @@ const AdminProjects = () => {
             leftSection={<IconDownload size={16} />}
             variant="outline"
             onClick={() => {
-              // Export functionality can be added here
               notifications.show({
                 message: 'Export feature coming soon!',
                 color: 'blue'
@@ -580,7 +579,7 @@ const AdminProjects = () => {
       </Group>
 
       {/* Stats Cards */}
-      <StatsCards projects={projects} />
+      {hasProjects && <StatsCards projects={projects} />}
 
       {/* Filters and Search */}
       <Paper withBorder radius="md" p="md" mb="md">
@@ -633,220 +632,239 @@ const AdminProjects = () => {
         </Group>
       </Paper>
 
-      {/* Enhanced DataTable */}
+      {/* DataTable */}
       <Paper withBorder radius="md" p="md">
-        <DataTable
-          records={paginatedProjects}
-          columns={[
-            {
-              accessor: 'image',
-              title: 'Preview',
-              width: 80,
-              render: (project) => (
-                project.image ? (
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    height={40}
-                    width={60}
-                    fit="cover"
-                    radius="sm"
-                  />
-                ) : (
-                  <Box
-                    w={60}
-                    h={40}
-                    bg="gray.1"
-                    style={{
-                      borderRadius: 4,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}
-                  >
-                    <IconCode size={20} color="gray" />
+        {hasProjects ? (
+          <DataTable
+            records={paginatedProjects}
+            columns={[
+              {
+                accessor: 'image',
+                title: 'Preview',
+                width: 80,
+                render: (project) => (
+                  project.image ? (
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      height={40}
+                      width={60}
+                      fit="cover"
+                      radius="sm"
+                    />
+                  ) : (
+                    <Box
+                      w={60}
+                      h={40}
+                      bg="gray.1"
+                      style={{
+                        borderRadius: 4,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      <IconCode size={20} color="gray" />
+                    </Box>
+                  )
+                )
+              },
+              {
+                accessor: 'title',
+                title: 'Project',
+                sortable: true,
+                render: (project) => (
+                  <Box>
+                    <Group gap="xs" align="center">
+                      <Text fw={500} size="sm" lineClamp={1}>
+                        {project.title}
+                      </Text>
+                      {project.featured && (
+                        <Tooltip label="Featured Project">
+                          <IconStarFilled size={14} color="gold" />
+                        </Tooltip>
+                      )}
+                    </Group>
+                    <Text size="xs" c="dimmed" lineClamp={2}>
+                      {project.description}
+                    </Text>
                   </Box>
                 )
-              )
-            },
-            {
-              accessor: 'title',
-              title: 'Project',
-              sortable: true,
-              render: (project) => (
-                <Box>
-                  <Group gap="xs" align="center">
-                    <Text fw={500} size="sm" lineClamp={1}>
-                      {project.title}
-                    </Text>
-                    {project.featured && (
-                      <Tooltip label="Featured Project">
-                        <IconStarFilled size={14} color="gold" />
+              },
+              {
+                accessor: 'category',
+                title: 'Category',
+                sortable: true,
+                render: (project) => (
+                  <Badge variant="light" size="sm" tt="capitalize">
+                    {project.category || 'Web'}
+                  </Badge>
+                )
+              },
+              {
+                accessor: 'tags',
+                title: 'Tags',
+                render: (project) => (
+                  <Group gap={4}>
+                    {project.tags?.slice(0, 2).map((tag) => (
+                      <Badge key={tag} size="sm" variant="outline" color="blue">
+                        {tag}
+                      </Badge>
+                    ))}
+                    {project.tags?.length > 2 && (
+                      <Tooltip label={project.tags.slice(2).join(', ')}>
+                        <Badge size="sm" variant="outline" color="gray">
+                          +{project.tags.length - 2}
+                        </Badge>
                       </Tooltip>
                     )}
                   </Group>
-                  <Text size="xs" c="dimmed" lineClamp={2}>
-                    {project.description}
-                  </Text>
-                </Box>
-              )
-            },
-            {
-              accessor: 'category',
-              title: 'Category',
-              sortable: true,
-              render: (project) => (
-                <Badge variant="light" size="sm" tt="capitalize">
-                  {project.category || 'Web'}
-                </Badge>
-              )
-            },
-            {
-              accessor: 'tags',
-              title: 'Tags',
-              render: (project) => (
-                <Group gap={4}>
-                  {project.tags?.slice(0, 2).map((tag) => (
-                    <Badge key={tag} size="sm" variant="outline" color="blue">
-                      {tag}
-                    </Badge>
-                  ))}
-                  {project.tags?.length > 2 && (
-                    <Tooltip label={project.tags.slice(2).join(', ')}>
-                      <Badge size="sm" variant="outline" color="gray">
-                        +{project.tags.length - 2}
-                      </Badge>
-                    </Tooltip>
-                  )}
-                </Group>
-              )
-            },
-            {
-              accessor: 'difficulty',
-              title: 'Difficulty',
-              sortable: true,
-              render: (project) => (
-                <Badge
-                  color={getDifficultyColor(project.difficulty)}
-                  size="sm"
-                  tt="capitalize"
-                >
-                  {project.difficulty || 'Intermediate'}
-                </Badge>
-              )
-            },
-            {
-              accessor: 'status',
-              title: 'Status',
-              sortable: true,
-              render: (project) => (
-                <Badge
-                  color={getStatusColor(project.status)}
-                  size="sm"
-                  tt="capitalize"
-                >
-                  {project.status}
-                </Badge>
-              )
-            },
-            {
-              accessor: 'actions',
-              title: 'Actions',
-              textAlign: 'right',
-              render: (project) => (
-                <Group gap={4} justify="flex-end">
-                  {project.links?.demo && (
-                    <Tooltip label="View Demo">
+                )
+              },
+              {
+                accessor: 'difficulty',
+                title: 'Difficulty',
+                sortable: true,
+                render: (project) => (
+                  <Badge
+                    color={getDifficultyColor(project.difficulty)}
+                    size="sm"
+                    tt="capitalize"
+                  >
+                    {project.difficulty || 'Intermediate'}
+                  </Badge>
+                )
+              },
+              {
+                accessor: 'status',
+                title: 'Status',
+                sortable: true,
+                render: (project) => (
+                  <Badge
+                    color={getStatusColor(project.status)}
+                    size="sm"
+                    tt="capitalize"
+                  >
+                    {project.status}
+                  </Badge>
+                )
+              },
+              {
+                accessor: 'actions',
+                title: 'Actions',
+                textAlign: 'right',
+                render: (project) => (
+                  <Group gap={4} justify="flex-end">
+                    {project.links?.demo && (
+                      <Tooltip label="View Demo">
+                        <ActionIcon
+                          component="a"
+                          href={project.links.demo}
+                          target="_blank"
+                          variant="subtle"
+                          color="gray"
+                          size="sm"
+                        >
+                          <IconEye size={16} />
+                        </ActionIcon>
+                      </Tooltip>
+                    )}
+                    {project.links?.github && (
+                      <Tooltip label="View Code">
+                        <ActionIcon
+                          component="a"
+                          href={project.links.github}
+                          target="_blank"
+                          variant="subtle"
+                          color="gray"
+                          size="sm"
+                        >
+                          <IconBrandGithub size={16} />
+                        </ActionIcon>
+                      </Tooltip>
+                    )}
+                    <Tooltip label="Edit Project">
                       <ActionIcon
-                        component="a"
-                        href={project.links.demo}
-                        target="_blank"
                         variant="subtle"
-                        color="gray"
+                        color="blue"
+                        onClick={() => handleEdit(project)}
                         size="sm"
                       >
-                        <IconEye size={16} />
+                        <IconEdit size={16} />
                       </ActionIcon>
                     </Tooltip>
-                  )}
-                  {project.links?.github && (
-                    <Tooltip label="View Code">
+                    <Tooltip label="Delete Project">
                       <ActionIcon
-                        component="a"
-                        href={project.links.github}
-                        target="_blank"
                         variant="subtle"
-                        color="gray"
+                        color="red"
+                        loading={deleteLoading === project.id}
+                        onClick={() => handleDelete(project)}
                         size="sm"
                       >
-                        <IconBrandGithub size={16} />
+                        <IconTrash size={16} />
                       </ActionIcon>
                     </Tooltip>
-                  )}
-                  <Tooltip label="Edit Project">
-                    <ActionIcon
-                      variant="subtle"
-                      color="blue"
-                      onClick={() => handleEdit(project)}
-                      size="sm"
-                    >
-                      <IconEdit size={16} />
-                    </ActionIcon>
-                  </Tooltip>
-                  <Tooltip label="Delete Project">
-                    <ActionIcon
-                      variant="subtle"
-                      color="red"
-                      loading={deleteLoading === project.id}
-                      onClick={() => handleDelete(project)}
-                      size="sm"
-                    >
-                      <IconTrash size={16} />
-                    </ActionIcon>
-                  </Tooltip>
-                </Group>
-              )
+                  </Group>
+                )
+              }
+            ]}
+            selectedRecords={selectedRecords}
+            onSelectedRecordsChange={setSelectedRecords}
+            totalRecords={filteredProjects.length}
+            recordsPerPage={pageSize}
+            page={page}
+            onPageChange={setPage}
+            recordsPerPageOptions={[5, 10, 20, 50]}
+            onRecordsPerPageChange={setPageSize}
+            sortStatus={{ columnAccessor: 'title', direction: 'asc' }}
+            highlightOnHover
+            verticalSpacing="md"
+            horizontalSpacing="lg"
+            borderRadius="md"
+            withTableBorder={false}
+            withColumnBorders={false}
+            striped
+            // Remove the custom emptyState and noRecordsText - let the table handle it naturally
+            emptyState={
+              !hasFilteredProjects ? (
+                <Center py={60}>
+                  <Stack align="center" gap="md">
+                    <IconSearch size={48} stroke={1} color="gray" />
+                    <Text size="lg" fw={500}>No projects found</Text>
+                    <Text c="dimmed" size="sm">
+                      {searchQuery || statusFilter || featuredFilter
+                        ? 'Try adjusting your filters'
+                        : 'Create your first project to get started'
+                      }
+                    </Text>
+                    {!searchQuery && !statusFilter && !featuredFilter && (
+                      <Button onClick={handleAdd} mt="md">
+                        Add Your First Project
+                      </Button>
+                    )}
+                  </Stack>
+                </Center>
+              ) : null
             }
-          ]}
-          selectedRecords={selectedRecords}
-          onSelectedRecordsChange={setSelectedRecords}
-          totalRecords={filteredProjects.length}
-          recordsPerPage={pageSize}
-          page={page}
-          onPageChange={setPage}
-          recordsPerPageOptions={[5, 10, 20, 50]}
-          onRecordsPerPageChange={setPageSize}
-          sortStatus={{ columnAccessor: 'title', direction: 'asc' }}
-          highlightOnHover
-          verticalSpacing="md"
-          horizontalSpacing="lg"
-          borderRadius="md"
-          withTableBorder={false}
-          withColumnBorders={false}
-          striped
-          emptyState={
-            <Center py={60}>
-              <Stack align="center" gap="md">
-                <IconSearch size={48} stroke={1} color="gray" />
-                <Text size="lg" fw={500}>No projects found</Text>
-                <Text c="dimmed" size="sm">
-                  {searchQuery || statusFilter || featuredFilter
-                    ? 'Try adjusting your filters'
-                    : 'Create your first project to get started'
-                  }
-                </Text>
-                {!searchQuery && !statusFilter && !featuredFilter && (
-                  <Button onClick={handleAdd} mt="md">
-                    Add Your First Project
-                  </Button>
-                )}
-              </Stack>
-            </Center>
-          }
-        />
+          />
+        ) : (
+          // Show empty state when no projects exist at all
+          <Center py={100}>
+            <Stack align="center" gap="md">
+              <IconCode size={64} stroke={1} color="gray" />
+              <Text size="xl" fw={500}>No projects yet</Text>
+              <Text c="dimmed" size="md" ta="center">
+                Create your first project to get started with your portfolio
+              </Text>
+              <Button onClick={handleAdd} mt="md" size="lg">
+                Add Your First Project
+              </Button>
+            </Stack>
+          </Center>
+        )}
       </Paper>
 
-      {/* Fixed Modal - Use Modal directly instead of modals.Modal */}
+      {/* Modal */}
       <Modal
         opened={formOpened}
         onClose={closeForm}

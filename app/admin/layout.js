@@ -14,6 +14,8 @@ import { IconLogout, IconSettings } from '@tabler/icons-react';
 import { useAuth } from '@/hooks/useAuth';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import classes from './admin.module.css';
+import { notifications } from '@mantine/notifications';
+
 
 export default function AdminLayout({ children }) {
   const pathname = usePathname();
@@ -24,7 +26,15 @@ export default function AdminLayout({ children }) {
   const handleLogout = async () => {
     try {
       await logout();
+      // Optionally redirect to home page after logout
+      window.location.href = '/';
     } catch (error) {
+      notifications.show({
+        title: 'Logout Failed',
+        message: 'An error occurred while logging out. Please try again.',
+        color: 'red',
+      });
+      // Log the error for debugging purposes
       console.error('Logout error:', error);
     }
   };
