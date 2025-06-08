@@ -22,6 +22,7 @@ import { FooterSocial } from "@/components/FooterSocial/FooterSocial";
 import { FloatingButtonsColumn } from "@/components/FloatingButtonsColumn";
 import NetworkOSInfo from "@/components/NetworkOSInfo";
 import { RootStyleRegistry } from "./EmotionRootStyleRegistry";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 export default function RootLayout({ children }) {
 
@@ -38,33 +39,35 @@ export default function RootLayout({ children }) {
         <RootStyleRegistry>
           <MantineProvider defaultColorScheme="auto" theme={theme}>
             <ModalsProvider>
-              {/* Hot Key Handler */}
-              <HotKeysHandler />
-              <NetworkOSInfo />
+              <AuthProvider>
+                {/* Hot Key Handler */}
+                <HotKeysHandler />
+                <NetworkOSInfo />
 
-              <AppShell>
-                {/* Header Start */}
-                <AppShellHeader>
-                  <HeaderSimple />
-                </AppShellHeader>
-                {/* Header End */}
+                <AppShell>
+                  {/* Header Start */}
+                  <AppShellHeader>
+                    <HeaderSimple />
+                  </AppShellHeader>
+                  {/* Header End */}
 
-                <AppShellMain>
-                  <Container size="lg" my="5rem">
-                    <SpeedInsights />
-                    {children}
-                    <Analytics />
-                  </Container>
-                </AppShellMain>
+                  <AppShellMain>
+                    <Container size="lg" my="5rem">
+                      <SpeedInsights />
+                      {children}
+                      <Analytics />
+                    </Container>
+                  </AppShellMain>
 
-                {/* Footer Start */}
-                <AppShellFooter>
-                  <FooterSocial />
-                </AppShellFooter>
-                {/* Footer End */}
+                  {/* Footer Start */}
+                  <AppShellFooter>
+                    <FooterSocial />
+                  </AppShellFooter>
+                  {/* Footer End */}
 
-                <FloatingButtonsColumn />
-              </AppShell>
+                  <FloatingButtonsColumn />
+                </AppShell>
+              </AuthProvider>
             </ModalsProvider>
           </MantineProvider>
         </RootStyleRegistry>

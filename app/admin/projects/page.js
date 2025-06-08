@@ -1,15 +1,13 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   Container,
   Title,
   Button,
-  Table,
   ActionIcon,
   Group,
   Badge,
-  Modal,
   TextInput,
   Textarea,
   MultiSelect,
@@ -21,7 +19,17 @@ import {
   Image,
   Text,
   Box,
-  Stack
+  Stack,
+  Paper,
+  Flex,
+  Select,
+  Tooltip,
+  Card,
+  ThemeIcon,
+  SimpleGrid,
+  Center,
+  RingProgress,
+  Modal // Add Modal import here
 } from '@mantine/core';
 import {
   IconPlus,
@@ -30,14 +38,30 @@ import {
   IconEye,
   IconAlertCircle,
   IconCheck,
-  IconX
+  IconX,
+  IconSearch,
+  IconFilter,
+  IconDownload,
+  IconUpload,
+  IconStar,
+  IconStarFilled,
+  IconCalendar,
+  IconCode,
+  IconExternalLink,
+  IconBrandGithub,
+  IconChartBar,
+  IconUsers,
+  IconTrendingUp
 } from '@tabler/icons-react';
+import { DataTable } from 'mantine-datatable';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
 import { useDisclosure } from '@mantine/hooks';
+import { modals } from '@mantine/modals';
 import { useProjects } from '@/hooks/useProjects';
 import { ProjectService } from '@/services/projectService';
 
+// Enhanced Project Form Component
 const ProjectForm = ({ project, opened, onClose, onSubmit }) => {
   const [loading, setLoading] = useState(false);
   const [imageFile, setImageFile] = useState(null);
@@ -53,7 +77,15 @@ const ProjectForm = ({ project, opened, onClose, onSubmit }) => {
       featured: project?.featured || false,
       status: project?.status || 'active',
       order: project?.order || 0,
-      video: project?.video || ''
+      video: project?.video || '',
+      category: project?.category || 'web',
+      difficulty: project?.difficulty || 'intermediate',
+      estimatedTime: project?.estimatedTime || ''
+    },
+    validate: {
+      title: (value) => !value ? 'Title is required' : null,
+      description: (value) => !value ? 'Description is required' : null,
+      tags: (value) => !value || value.length === 0 ? 'At least one tag is required' : null,
     }
   });
 
@@ -65,11 +97,11 @@ const ProjectForm = ({ project, opened, onClose, onSubmit }) => {
         links: {
           github: values.github,
           demo: values.demo
-        }
+        },
+        updatedAt: new Date().toISOString()
       };
 
       if (project?.id) {
-        // Update existing project
         await ProjectService.updateProject(project.id, projectData, imageFile);
         notifications.show({
           title: 'Success',
@@ -78,10 +110,9 @@ const ProjectForm = ({ project, opened, onClose, onSubmit }) => {
           icon: <IconCheck size={16} />
         });
       } else {
-        // Create new project
         await ProjectService.createProject(projectData, imageFile);
         notifications.show({
-          title: 'Success', 
+          title: 'Success',
           message: 'Project created successfully',
           color: 'green',
           icon: <IconCheck size={16} />
@@ -105,14 +136,9 @@ const ProjectForm = ({ project, opened, onClose, onSubmit }) => {
   };
 
   return (
-    <Modal
-      opened={opened}
-      onClose={onClose}
-      title={project ? 'Edit Project' : 'Add New Project'}
-      size="lg"
-    >
-      <form onSubmit={form.onSubmit(handleSubmit)}>
-        <Stack gap="md">
+    <form onSubmit={form.onSubmit(handleSubmit)}>
+      <Stack gap="md">
+        <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
           <TextInput
             label="Title"
             placeholder="Project title"
@@ -120,111 +146,266 @@ const ProjectForm = ({ project, opened, onClose, onSubmit }) => {
             {...form.getInputProps('title')}
           />
 
-          <Textarea
-            label="Description"
-            placeholder="Project description"
-            required
-            minRows={3}
-            {...form.getInputProps('description')}
+          <Select
+            label="Category"
+            placeholder="Select category"
+            data={[
+              { value: 'web', label: 'Web Application' },
+              { value: 'mobile', label: 'Mobile App' },
+              { value: 'desktop', label: 'Desktop Application' },
+              { value: 'api', label: 'API/Backend' },
+              { value: 'tool', label: 'Tool/Utility' },
+              { value: 'game', label: 'Game' },
+              { value: 'ai', label: 'AI/ML' },
+              { value: 'other', label: 'Other' }
+            ]}
+            {...form.getInputProps('category')}
           />
+        </SimpleGrid>
 
+        <Textarea
+          label="Description"
+          placeholder="Project description"
+          required
+          minRows={3}
+          maxRows={6}
+          autosize
+          {...form.getInputProps('description')}
+        />
+
+        <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
           <MultiSelect
             label="Tags"
             placeholder="Select or add tags"
-            data={['React', 'Next.js', 'Firebase', 'Python', 'Node.js', 'TypeScript', 'Mantine']}
+            data={['React', 'Next.js', 'Firebase', 'Python', 'Node.js', 'TypeScript', 'Mantine', 'AI', 'ML', 'API']}
             searchable
             creatable
             getCreateLabel={(query) => `+ Create ${query}`}
-            onCreate={(query) => {
-              return query;
-            }}
+            onCreate={(query) => query}
             {...form.getInputProps('tags')}
           />
 
           <MultiSelect
             label="Technologies"
             placeholder="Select technologies"
-            data={['React', 'Next.js', 'Firebase', 'Python', 'Node.js', 'TypeScript', 'Mantine', 'Taichi']}
+            data={['React', 'Next.js', 'Firebase', 'Python', 'Node.js', 'TypeScript', 'Mantine', 'Docker', 'AWS', 'MongoDB']}
             searchable
             creatable
             getCreateLabel={(query) => `+ Create ${query}`}
-            onCreate={(query) => {
-              return query;
-            }}
+            onCreate={(query) => query}
             {...form.getInputProps('technologies')}
           />
+        </SimpleGrid>
 
-          <FileInput
-            label="Project Image"
-            placeholder="Upload project image"
-            accept="image/*"
-            value={imageFile}
-            onChange={setImageFile}
-          />
+        <FileInput
+          label="Project Image"
+          placeholder="Upload project image"
+          accept="image/*"
+          value={imageFile}
+          onChange={setImageFile}
+          leftSection={<IconUpload size={16} />}
+        />
 
-          {project?.image && (
-            <Box>
-              <Text size="sm" fw={500} mb="xs">Current Image:</Text>
-              <Image
-                src={project.image}
-                alt="Current project image"
-                height={100}
-                width={150}
-                fit="cover"
-                radius="sm"
-              />
-            </Box>
-          )}
+        {project?.image && (
+          <Box>
+            <Text size="sm" fw={500} mb="xs">Current Image:</Text>
+            <Image
+              src={project.image}
+              alt="Current project image"
+              height={100}
+              width={150}
+              fit="cover"
+              radius="sm"
+            />
+          </Box>
+        )}
 
-          <TextInput
-            label="Video URL"
-            placeholder="Video URL (optional)"
-            {...form.getInputProps('video')}
-          />
-
+        <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
           <TextInput
             label="GitHub URL"
             placeholder="GitHub repository URL"
+            leftSection={<IconBrandGithub size={16} />}
             {...form.getInputProps('github')}
           />
 
           <TextInput
             label="Demo URL"
             placeholder="Live demo URL"
+            leftSection={<IconExternalLink size={16} />}
             {...form.getInputProps('demo')}
           />
+        </SimpleGrid>
 
+        <SimpleGrid cols={{ base: 1, sm: 3 }} spacing="md">
           <NumberInput
-            label="Order"
-            placeholder="Display order"
+            label="Display Order"
+            placeholder="Order"
+            min={0}
             {...form.getInputProps('order')}
           />
 
+          <Select
+            label="Difficulty"
+            placeholder="Select difficulty"
+            data={[
+              { value: 'beginner', label: 'Beginner' },
+              { value: 'intermediate', label: 'Intermediate' },
+              { value: 'advanced', label: 'Advanced' },
+              { value: 'expert', label: 'Expert' }
+            ]}
+            {...form.getInputProps('difficulty')}
+          />
+
+          <TextInput
+            label="Estimated Time"
+            placeholder="e.g., 2 weeks"
+            {...form.getInputProps('estimatedTime')}
+          />
+        </SimpleGrid>
+
+        <Group grow>
           <Switch
             label="Featured Project"
+            description="Show on homepage"
             {...form.getInputProps('featured', { type: 'checkbox' })}
           />
 
-          <Group justify="flex-end">
-            <Button variant="outline" onClick={onClose}>
-              Cancel
-            </Button>
-            <Button type="submit" loading={loading}>
-              {project ? 'Update' : 'Create'}
-            </Button>
-          </Group>
-        </Stack>
-      </form>
-    </Modal>
+          <Select
+            label="Status"
+            data={[
+              { value: 'active', label: 'Active' },
+              { value: 'completed', label: 'Completed' },
+              { value: 'paused', label: 'Paused' },
+              { value: 'archived', label: 'Archived' }
+            ]}
+            {...form.getInputProps('status')}
+          />
+        </Group>
+
+        <Group justify="flex-end" mt="xl">
+          <Button variant="outline" onClick={onClose}>
+            Cancel
+          </Button>
+          <Button type="submit" loading={loading} leftSection={<IconCheck size={16} />}>
+            {project ? 'Update Project' : 'Create Project'}
+          </Button>
+        </Group>
+      </Stack>
+    </form>
   );
 };
 
+// Stats Cards Component
+const StatsCards = ({ projects }) => {
+  const stats = useMemo(() => {
+    const total = projects.length;
+    const featured = projects.filter(p => p.featured).length;
+    const active = projects.filter(p => p.status === 'active').length;
+    const completed = projects.filter(p => p.status === 'completed').length;
+
+    return [
+      {
+        title: 'Total Projects',
+        value: total,
+        icon: IconCode,
+        color: 'blue',
+        description: 'All projects'
+      },
+      {
+        title: 'Featured',
+        value: featured,
+        icon: IconStarFilled,
+        color: 'yellow',
+        description: 'Showcase projects'
+      },
+      {
+        title: 'Active',
+        value: active,
+        icon: IconTrendingUp,
+        color: 'green',
+        description: 'In development'
+      },
+      {
+        title: 'Completed',
+        value: completed,
+        icon: IconCheck,
+        color: 'teal',
+        description: 'Finished projects'
+      }
+    ];
+  }, [projects]);
+
+  return (
+    <SimpleGrid cols={{ base: 2, sm: 4 }} spacing="md" mb="xl">
+      {stats.map((stat) => (
+        <Card key={stat.title} withBorder radius="md" p="md">
+          <Group justify="space-between">
+            <Text size="sm" c="dimmed" fw={500}>
+              {stat.title}
+            </Text>
+            <ThemeIcon color={stat.color} variant="light" size="sm">
+              <stat.icon size={16} />
+            </ThemeIcon>
+          </Group>
+          <Text fw={700} size="xl" mt="xs">
+            {stat.value}
+          </Text>
+          <Text size="xs" c="dimmed" mt={4}>
+            {stat.description}
+          </Text>
+        </Card>
+      ))}
+    </SimpleGrid>
+  );
+};
+
+// Main Admin Component
 const AdminProjects = () => {
   const { projects, loading, error, refetch } = useProjects();
   const [selectedProject, setSelectedProject] = useState(null);
   const [formOpened, { open: openForm, close: closeForm }] = useDisclosure(false);
   const [deleteLoading, setDeleteLoading] = useState(null);
 
+  // DataTable state
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
+  const [featuredFilter, setFeaturedFilter] = useState('');
+  const [selectedRecords, setSelectedRecords] = useState([]);
+
+  // Filtered and paginated data
+  const filteredProjects = useMemo(() => {
+    let filtered = projects || [];
+
+    if (searchQuery) {
+      filtered = filtered.filter(project =>
+        project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        project.tags?.join(' ').toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    if (statusFilter) {
+      filtered = filtered.filter(project => project.status === statusFilter);
+    }
+
+    if (featuredFilter !== '') {
+      filtered = filtered.filter(project =>
+        featuredFilter === 'true' ? project.featured : !project.featured
+      );
+    }
+
+    return filtered;
+  }, [projects, searchQuery, statusFilter, featuredFilter]);
+
+  const paginatedProjects = useMemo(() => {
+    const start = (page - 1) * pageSize;
+    const end = start + pageSize;
+    return filteredProjects.slice(start, end);
+  }, [filteredProjects, page, pageSize]);
+
+  // Action handlers
   const handleEdit = (project) => {
     setSelectedProject(project);
     openForm();
@@ -235,11 +416,22 @@ const AdminProjects = () => {
     openForm();
   };
 
-  const handleDelete = async (project) => {
-    if (!confirm(`Are you sure you want to delete "${project.title}"?`)) {
-      return;
-    }
+  const handleDelete = (project) => {
+    modals.openConfirmModal({
+      title: 'Delete Project',
+      children: (
+        <Text size="sm">
+          Are you sure you want to delete "<strong>{project.title}</strong>"?
+          This action cannot be undone.
+        </Text>
+      ),
+      labels: { confirm: 'Delete', cancel: 'Cancel' },
+      confirmProps: { color: 'red' },
+      onConfirm: () => performDelete(project),
+    });
+  };
 
+  const performDelete = async (project) => {
     setDeleteLoading(project.id);
     try {
       await ProjectService.deleteProject(project.id, project.imagePath);
@@ -262,14 +454,80 @@ const AdminProjects = () => {
     }
   };
 
+  const handleBulkDelete = () => {
+    if (selectedRecords.length === 0) return;
+
+    modals.openConfirmModal({
+      title: 'Delete Multiple Projects',
+      children: (
+        <Text size="sm">
+          Are you sure you want to delete {selectedRecords.length} selected projects?
+          This action cannot be undone.
+        </Text>
+      ),
+      labels: { confirm: 'Delete All', cancel: 'Cancel' },
+      confirmProps: { color: 'red' },
+      onConfirm: async () => {
+        try {
+          await Promise.all(
+            selectedRecords.map(project =>
+              ProjectService.deleteProject(project.id, project.imagePath)
+            )
+          );
+          notifications.show({
+            title: 'Success',
+            message: `${selectedRecords.length} projects deleted successfully`,
+            color: 'green',
+            icon: <IconCheck size={16} />
+          });
+          setSelectedRecords([]);
+          refetch();
+        } catch (error) {
+          notifications.show({
+            title: 'Error',
+            message: 'Failed to delete some projects',
+            color: 'red',
+            icon: <IconX size={16} />
+          });
+        }
+      },
+    });
+  };
+
   const handleFormSubmit = () => {
     refetch();
+    setSelectedRecords([]);
+  };
+
+  const getDifficultyColor = (difficulty) => {
+    const colors = {
+      beginner: 'green',
+      intermediate: 'blue',
+      advanced: 'orange',
+      expert: 'red'
+    };
+    return colors[difficulty] || 'gray';
+  };
+
+  const getStatusColor = (status) => {
+    const colors = {
+      active: 'green',
+      completed: 'blue',
+      paused: 'yellow',
+      archived: 'gray'
+    };
+    return colors[status] || 'gray';
   };
 
   if (loading) {
     return (
       <Container size="xl" py={40}>
-        <Loader size="xl" />
+        <Center>
+          <Stack align="center" gap="md">
+            <Loader size="xl" />
+            <Text>Loading projects...</Text>
+          </Stack>
+        </Center>
       </Container>
     );
   }
@@ -286,29 +544,106 @@ const AdminProjects = () => {
 
   return (
     <Container size="xl" py={40}>
+      {/* Header */}
       <Group justify="space-between" mb="xl">
-        <Title order={1}>Manage Projects</Title>
-        <Button leftSection={<IconPlus size={16} />} onClick={handleAdd}>
-          Add Project
-        </Button>
+        <Box>
+          <Title order={1} size="h1" fw={600}>
+            Project Management
+          </Title>
+          <Text c="dimmed" size="lg" mt="xs">
+            Manage your portfolio projects with advanced tools
+          </Text>
+        </Box>
+        <Group>
+          <Button
+            leftSection={<IconDownload size={16} />}
+            variant="outline"
+            onClick={() => {
+              // Export functionality can be added here
+              notifications.show({
+                message: 'Export feature coming soon!',
+                color: 'blue'
+              });
+            }}
+          >
+            Export
+          </Button>
+          <Button
+            leftSection={<IconPlus size={16} />}
+            onClick={handleAdd}
+            gradient={{ from: 'blue', to: 'cyan' }}
+            variant="gradient"
+          >
+            Add Project
+          </Button>
+        </Group>
       </Group>
 
-      <Table striped highlightOnHover>
-        <Table.Thead>
-          <Table.Tr>
-            <Table.Th>Image</Table.Th>
-            <Table.Th>Title</Table.Th>
-            <Table.Th>Tags</Table.Th>
-            <Table.Th>Featured</Table.Th>
-            <Table.Th>Status</Table.Th>
-            <Table.Th>Actions</Table.Th>
-          </Table.Tr>
-        </Table.Thead>
-        <Table.Tbody>
-          {projects.map((project) => (
-            <Table.Tr key={project.id}>
-              <Table.Td>
-                {project.image && (
+      {/* Stats Cards */}
+      <StatsCards projects={projects} />
+
+      {/* Filters and Search */}
+      <Paper withBorder radius="md" p="md" mb="md">
+        <Group justify="space-between" align="flex-end">
+          <Group flex={1}>
+            <TextInput
+              placeholder="Search projects..."
+              leftSection={<IconSearch size={16} />}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{ flex: 1, minWidth: 200 }}
+            />
+            <Select
+              placeholder="Status"
+              leftSection={<IconFilter size={16} />}
+              data={[
+                { value: '', label: 'All Status' },
+                { value: 'active', label: 'Active' },
+                { value: 'completed', label: 'Completed' },
+                { value: 'paused', label: 'Paused' },
+                { value: 'archived', label: 'Archived' }
+              ]}
+              value={statusFilter}
+              onChange={setStatusFilter}
+              clearable
+            />
+            <Select
+              placeholder="Featured"
+              data={[
+                { value: '', label: 'All Projects' },
+                { value: 'true', label: 'Featured Only' },
+                { value: 'false', label: 'Non-Featured' }
+              ]}
+              value={featuredFilter}
+              onChange={setFeaturedFilter}
+              clearable
+            />
+          </Group>
+
+          {selectedRecords.length > 0 && (
+            <Button
+              color="red"
+              variant="outline"
+              leftSection={<IconTrash size={16} />}
+              onClick={handleBulkDelete}
+            >
+              Delete Selected ({selectedRecords.length})
+            </Button>
+          )}
+        </Group>
+      </Paper>
+
+      {/* Enhanced DataTable */}
+      <Paper withBorder radius="md" p="md">
+        <DataTable
+          records={paginatedProjects}
+          columns={[
+            {
+              accessor: 'image',
+              title: 'Preview',
+              width: 80,
+              render: (project) => (
+                project.image ? (
                   <Image
                     src={project.image}
                     alt={project.title}
@@ -317,79 +652,236 @@ const AdminProjects = () => {
                     fit="cover"
                     radius="sm"
                   />
-                )}
-              </Table.Td>
-              <Table.Td>
-                <Text fw={500}>{project.title}</Text>
-                <Text size="xs" c="dimmed" lineClamp={1}>
-                  {project.description}
-                </Text>
-              </Table.Td>
-              <Table.Td>
-                <Group gap="xs">
-                  {project.tags?.slice(0, 3).map((tag) => (
-                    <Badge key={tag} size="sm" variant="light">
+                ) : (
+                  <Box
+                    w={60}
+                    h={40}
+                    bg="gray.1"
+                    style={{
+                      borderRadius: 4,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}
+                  >
+                    <IconCode size={20} color="gray" />
+                  </Box>
+                )
+              )
+            },
+            {
+              accessor: 'title',
+              title: 'Project',
+              sortable: true,
+              render: (project) => (
+                <Box>
+                  <Group gap="xs" align="center">
+                    <Text fw={500} size="sm" lineClamp={1}>
+                      {project.title}
+                    </Text>
+                    {project.featured && (
+                      <Tooltip label="Featured Project">
+                        <IconStarFilled size={14} color="gold" />
+                      </Tooltip>
+                    )}
+                  </Group>
+                  <Text size="xs" c="dimmed" lineClamp={2}>
+                    {project.description}
+                  </Text>
+                </Box>
+              )
+            },
+            {
+              accessor: 'category',
+              title: 'Category',
+              sortable: true,
+              render: (project) => (
+                <Badge variant="light" size="sm" tt="capitalize">
+                  {project.category || 'Web'}
+                </Badge>
+              )
+            },
+            {
+              accessor: 'tags',
+              title: 'Tags',
+              render: (project) => (
+                <Group gap={4}>
+                  {project.tags?.slice(0, 2).map((tag) => (
+                    <Badge key={tag} size="sm" variant="outline" color="blue">
                       {tag}
                     </Badge>
                   ))}
-                  {project.tags?.length > 3 && (
-                    <Badge size="sm" variant="outline">
-                      +{project.tags.length - 3}
-                    </Badge>
+                  {project.tags?.length > 2 && (
+                    <Tooltip label={project.tags.slice(2).join(', ')}>
+                      <Badge size="sm" variant="outline" color="gray">
+                        +{project.tags.length - 2}
+                      </Badge>
+                    </Tooltip>
                   )}
                 </Group>
-              </Table.Td>
-              <Table.Td>
-                <Badge color={project.featured ? 'green' : 'gray'}>
-                  {project.featured ? 'Yes' : 'No'}
+              )
+            },
+            {
+              accessor: 'difficulty',
+              title: 'Difficulty',
+              sortable: true,
+              render: (project) => (
+                <Badge
+                  color={getDifficultyColor(project.difficulty)}
+                  size="sm"
+                  tt="capitalize"
+                >
+                  {project.difficulty || 'Intermediate'}
                 </Badge>
-              </Table.Td>
-              <Table.Td>
-                <Badge color={project.status === 'active' ? 'green' : 'red'}>
+              )
+            },
+            {
+              accessor: 'status',
+              title: 'Status',
+              sortable: true,
+              render: (project) => (
+                <Badge
+                  color={getStatusColor(project.status)}
+                  size="sm"
+                  tt="capitalize"
+                >
                   {project.status}
                 </Badge>
-              </Table.Td>
-              <Table.Td>
-                <Group gap="xs">
-                  <ActionIcon
-                    variant="subtle"
-                    color="blue"
-                    onClick={() => handleEdit(project)}
-                  >
-                    <IconEdit size={16} />
-                  </ActionIcon>
-                  <ActionIcon
-                    variant="subtle"
-                    color="red"
-                    loading={deleteLoading === project.id}
-                    onClick={() => handleDelete(project)}
-                  >
-                    <IconTrash size={16} />
-                  </ActionIcon>
+              )
+            },
+            {
+              accessor: 'actions',
+              title: 'Actions',
+              textAlign: 'right',
+              render: (project) => (
+                <Group gap={4} justify="flex-end">
                   {project.links?.demo && (
-                    <ActionIcon
-                      component="a"
-                      href={project.links.demo}
-                      target="_blank"
-                      variant="subtle"
-                      color="gray"
-                    >
-                      <IconEye size={16} />
-                    </ActionIcon>
+                    <Tooltip label="View Demo">
+                      <ActionIcon
+                        component="a"
+                        href={project.links.demo}
+                        target="_blank"
+                        variant="subtle"
+                        color="gray"
+                        size="sm"
+                      >
+                        <IconEye size={16} />
+                      </ActionIcon>
+                    </Tooltip>
                   )}
+                  {project.links?.github && (
+                    <Tooltip label="View Code">
+                      <ActionIcon
+                        component="a"
+                        href={project.links.github}
+                        target="_blank"
+                        variant="subtle"
+                        color="gray"
+                        size="sm"
+                      >
+                        <IconBrandGithub size={16} />
+                      </ActionIcon>
+                    </Tooltip>
+                  )}
+                  <Tooltip label="Edit Project">
+                    <ActionIcon
+                      variant="subtle"
+                      color="blue"
+                      onClick={() => handleEdit(project)}
+                      size="sm"
+                    >
+                      <IconEdit size={16} />
+                    </ActionIcon>
+                  </Tooltip>
+                  <Tooltip label="Delete Project">
+                    <ActionIcon
+                      variant="subtle"
+                      color="red"
+                      loading={deleteLoading === project.id}
+                      onClick={() => handleDelete(project)}
+                      size="sm"
+                    >
+                      <IconTrash size={16} />
+                    </ActionIcon>
+                  </Tooltip>
                 </Group>
-              </Table.Td>
-            </Table.Tr>
-          ))}
-        </Table.Tbody>
-      </Table>
+              )
+            }
+          ]}
+          selectedRecords={selectedRecords}
+          onSelectedRecordsChange={setSelectedRecords}
+          totalRecords={filteredProjects.length}
+          recordsPerPage={pageSize}
+          page={page}
+          onPageChange={setPage}
+          recordsPerPageOptions={[5, 10, 20, 50]}
+          onRecordsPerPageChange={setPageSize}
+          sortStatus={{ columnAccessor: 'title', direction: 'asc' }}
+          highlightOnHover
+          verticalSpacing="md"
+          horizontalSpacing="lg"
+          borderRadius="md"
+          withTableBorder={false}
+          withColumnBorders={false}
+          striped
+          emptyState={
+            <Center py={60}>
+              <Stack align="center" gap="md">
+                <IconSearch size={48} stroke={1} color="gray" />
+                <Text size="lg" fw={500}>No projects found</Text>
+                <Text c="dimmed" size="sm">
+                  {searchQuery || statusFilter || featuredFilter
+                    ? 'Try adjusting your filters'
+                    : 'Create your first project to get started'
+                  }
+                </Text>
+                {!searchQuery && !statusFilter && !featuredFilter && (
+                  <Button onClick={handleAdd} mt="md">
+                    Add Your First Project
+                  </Button>
+                )}
+              </Stack>
+            </Center>
+          }
+        />
+      </Paper>
 
-      <ProjectForm
-        project={selectedProject}
+      {/* Fixed Modal - Use Modal directly instead of modals.Modal */}
+      <Modal
         opened={formOpened}
         onClose={closeForm}
-        onSubmit={handleFormSubmit}
-      />
+        title={
+          <Group>
+            <ThemeIcon variant="light" size="lg">
+              {selectedProject ? <IconEdit size={20} /> : <IconPlus size={20} />}
+            </ThemeIcon>
+            <Box>
+              <Text fw={600} size="lg">
+                {selectedProject ? 'Edit Project' : 'Create New Project'}
+              </Text>
+              <Text size="sm" c="dimmed">
+                {selectedProject
+                  ? 'Update your project details'
+                  : 'Add a new project to your portfolio'
+                }
+              </Text>
+            </Box>
+          </Group>
+        }
+        size="xl"
+        radius="md"
+        overlayProps={{
+          backgroundOpacity: 0.55,
+          blur: 3,
+        }}
+      >
+        <ProjectForm
+          project={selectedProject}
+          opened={formOpened}
+          onClose={closeForm}
+          onSubmit={handleFormSubmit}
+        />
+      </Modal>
     </Container>
   );
 };

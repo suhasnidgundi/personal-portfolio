@@ -1,0 +1,3 @@
+.adminShell :global(.mantine-AppShell-main) {
+    padding: 0 !important;
+}
