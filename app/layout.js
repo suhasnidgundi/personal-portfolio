@@ -52,16 +52,6 @@ export default function RootLayout({ children }) {
                 <AppShell>
                   {/* Header Start */}
                   <AppShellHeader>
-                    <marquee width="100%" direction="left" behavior="scroll" scrollamount="20" style={{ color: 'red', fontSize: '1.2rem', fontWeight: 'bold' }}>
-                      <span>🚧 The Site is Under Construction ! 🛠️👷‍♂️</span>
-                      <span>🚧 The Site is Under Construction ! 🛠️👷‍♂️</span>
-                      <span>🚧 The Site is Under Construction ! 🛠️👷‍♂️</span>
-                      <span>🚧 The Site is Under Construction ! 🛠️👷‍♂️</span>
-                      <span>🚧 The Site is Under Construction ! 🛠️👷‍♂️</span>
-                      <span>🚧 The Site is Under Construction ! 🛠️👷‍♂️</span>
-                      <span>🚧 The Site is Under Construction ! 🛠️👷‍♂️</span>
-                      <span>🚧 The Site is Under Construction ! 🛠️👷‍♂️</span>
-                    </marquee>
                     <HeaderSimple />
                   </AppShellHeader>
                   {/* Header End */}
