@@ -22,7 +22,9 @@ import {
   IconPdf,
   IconBrandGithub,
   IconBrandLinkedin,
-  IconBrandInstagram
+  IconBrandInstagram,
+  IconBrandGmail,
+  IconMail
 } from "@tabler/icons-react";
 import classes from "./HeaderSimple.module.css";
 import Link from "next/link";
@@ -136,8 +138,8 @@ export function HeaderSimple() {
             <ActionIcon size="4rem" variant="default" radius="xl" onClick={() => { document.location.href = "https://www.linkedin.com/in/suhasnidgundi/"; }}>
               <IconBrandLinkedin size="3rem" />
             </ActionIcon>
-            <ActionIcon size="4rem" variant="default" radius="xl" onClick={() => { document.location.href = "https://www.instagram.com/just.another.suhas"; }}>
-              <IconBrandInstagram size="3rem" />
+            <ActionIcon size="4rem" variant="default" radius="xl" onClick={() => { document.location.href = "mailto:suhasnidgundi@gmail.com"; }}>
+              <IconMail size="3rem" />
             </ActionIcon>
           </Group>
         </ScrollArea>
