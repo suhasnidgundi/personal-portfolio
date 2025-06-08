@@ -1,15 +1,16 @@
-"use client"; 
+"use client";
 
 import { Container, Text, Title, Flex, ActionIcon } from '@mantine/core';
 import { IconChevronDown } from '@tabler/icons-react';
 import Link from 'next/link';
 import { ProjectsSection } from '@/components/ProjectsSection/ProjectsSection';
+import { TextAnimate } from '@gfazioli/mantine-text-animate';
 
 const Home = () => {
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects');
     if (projectsSection) {
-      projectsSection.scrollIntoView({ 
+      projectsSection.scrollIntoView({
         behavior: 'smooth',
         block: 'start'
       });
@@ -36,14 +37,21 @@ const Home = () => {
             w="fit-content"
             style={{ alignSelf: 'start' }}
           >
-            <Title
-              order={1}
+            <TextAnimate
+              animate="in"
+              animation="blur"
+              by="character"
+              component={Text}
               fz={{ base: '3rem', md: '6rem' }}
               fw={400}
-              style={{ letterSpacing: '-0.02em' }}
+              style={{
+                letterSpacing: '-0.02em',
+                lineHeight: 1.2
+              }}
+              duration={3}
             >
               engineer.
-            </Title>
+            </TextAnimate>
           </Flex>
 
           <Flex
@@ -69,7 +77,7 @@ const Home = () => {
               Student @ <Link style={{ textDecoration: "none" }} href="https://www.dypcoei.edu.in/">DYPCOEI</Link>
             </Text>
           </Flex>
-          
+
           <Flex
             justify="center"
             w="100%"
@@ -120,16 +128,16 @@ const Home = () => {
               <Text
                 fz={{ base: '1rem', md: '1.2rem' }}
                 fw={500}
-                style={{ 
+                style={{
                   color: 'inherit',
                   transition: 'all 0.3s ease',
                 }}
               >
                 Dive in
               </Text>
-              <IconChevronDown 
-                size={20} 
-                stroke={2} 
+              <IconChevronDown
+                size={20}
+                stroke={2}
                 style={{
                   transition: 'transform 0.3s ease',
                 }}

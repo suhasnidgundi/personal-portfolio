@@ -1,5 +1,6 @@
 import "@mantine/core/styles.css";
 import '@mantine/notifications/styles.css';
+import '@gfazioli/mantine-text-animate/styles.css';
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
@@ -41,15 +42,26 @@ export default function RootLayout({ children }) {
         <RootStyleRegistry>
           <MantineProvider defaultColorScheme="auto" theme={theme}>
             <ModalsProvider>
-              <Notifications/>
+              <Notifications />
               <AuthProvider>
                 {/* Hot Key Handler */}
                 <HotKeysHandler />
                 <NetworkOSInfo />
 
+
                 <AppShell>
                   {/* Header Start */}
                   <AppShellHeader>
+                    <marquee width="100%" direction="left" behavior="scroll" scrollamount="20" style={{ color: 'red', fontSize: '1.2rem', fontWeight: 'bold' }}>
+                      <span>🚧 The Site is Under Construction ! 🛠️👷‍♂️</span>
+                      <span>🚧 The Site is Under Construction ! 🛠️👷‍♂️</span>
+                      <span>🚧 The Site is Under Construction ! 🛠️👷‍♂️</span>
+                      <span>🚧 The Site is Under Construction ! 🛠️👷‍♂️</span>
+                      <span>🚧 The Site is Under Construction ! 🛠️👷‍♂️</span>
+                      <span>🚧 The Site is Under Construction ! 🛠️👷‍♂️</span>
+                      <span>🚧 The Site is Under Construction ! 🛠️👷‍♂️</span>
+                      <span>🚧 The Site is Under Construction ! 🛠️👷‍♂️</span>
+                    </marquee>
                     <HeaderSimple />
                   </AppShellHeader>
                   {/* Header End */}
