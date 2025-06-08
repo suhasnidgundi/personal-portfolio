@@ -42,7 +42,7 @@ export const portfolio = {
     os: "Microsoft Windows XP Professional SP2 (64bit edition)",
     desktopWallpaper: "Bliss",
     codeEditor: "Visual Studio Code, Always",
-    lastUpdated: "12 of April 2024",
+    lastUpdated: "8 of June 2025",
   },
 
   projects: [
@@ -102,8 +102,9 @@ export const headerConfig = {
     },
   },
   navItems: [
-    { text: "ABOUT ME", href: "#aboutMe" },
-    { text: "MY PROJECTS", href: "#projects" },
-    { text: "CONTACT ME", href: "#contactMe" },
+    { text: "HOME", href: "/" },
+    { text: "ABOUT ME", href: "/about" },
+    { text: "PROJECTS", href: "/projects" },
+    { text: "CONTACT", href: "#contactMe" },
   ],
 };
