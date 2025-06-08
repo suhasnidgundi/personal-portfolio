@@ -416,7 +416,7 @@ const AdminProjects = () => {
       title: 'Delete Project',
       children: (
         <Text size="sm">
-          Are you sure you want to delete "<strong>{project.title}</strong>"?
+          Are you sure you want to delete &ldquo;<strong>{project.title}</strong>&rdquo;?
           This action cannot be undone.
         </Text>
       ),
