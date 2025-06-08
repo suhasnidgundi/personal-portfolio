@@ -1,0 +1,211 @@
+.section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: var(--mantine-color-body);
+  scroll-margin-top: 80px;
+}
+
+.header {
+  text-align: center;
+}
+
+.title {
+  color: var(--mantine-color-text);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--mantine-spacing-md);
+}
+
+.subtitle {
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.projectsContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Grid Layout for Desktop and Tablet */
+.desktopGrid {
+  display: grid;
+}
+
+.mobileStack {
+  display: none;
+}
+
+.gridCol {
+  display: flex;
+}
+
+.projectCard {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
+  background: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7));
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.projectCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
+  border-color: light-dark(var(--mantine-color-gray-4), var(--mantine-color-dark-3));
+}
+
+.projectCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--mantine-color-blue-5), var(--mantine-color-violet-5));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.projectCard:hover::before {
+  opacity: 1;
+}
+
+.projectTitle {
+  color: var(--mantine-color-text);
+  transition: color 0.3s ease;
+  line-height: 1.3;
+}
+
+.projectCard:hover .projectTitle {
+  color: var(--mantine-color-blue-6);
+}
+
+.projectDescription {
+  line-height: 1.5;
+}
+
+.projectLinks {
+  flex-shrink: 0;
+}
+
+.projectLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--mantine-radius-md);
+  background: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-gray-4));
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
+}
+
+.projectLink:hover {
+  background: var(--mantine-color-blue-6);
+  color: var(--mantine-color-white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(36, 150, 251, 0.3);
+  border-color: var(--mantine-color-blue-6);
+}
+
+.techStack {
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.techBadge {
+  background: light-dark(var(--mantine-color-blue-0), var(--mantine-color-dark-5));
+  color: light-dark(var(--mantine-color-blue-9), var(--mantine-color-blue-3));
+  border: 1px solid light-dark(var(--mantine-color-blue-2), var(--mantine-color-dark-4));
+  font-weight: 500;
+  font-size: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.techBadge:hover {
+  background: light-dark(var(--mantine-color-blue-1), var(--mantine-color-dark-4));
+  transform: translateY(-1px);
+}
+
+.techBadgeMore {
+  background: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-gray-4));
+  border: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  font-weight: 500;
+  font-size: 0.75rem;
+}
+
+/* Responsive breakpoints */
+@media (max-width: $mantine-breakpoint-sm) {
+  .desktopGrid {
+    display: none;
+  }
+  
+  .mobileStack {
+    display: flex;
+  }
+  
+  .section {
+    min-height: auto;
+    padding: var(--mantine-spacing-xl) 0;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+  
+  .projectCard {
+    padding: var(--mantine-spacing-md);
+  }
+  
+  .projectLinks {
+    margin-top: var(--mantine-spacing-xs);
+  }
+  
+  .techStack {
+    margin-top: var(--mantine-spacing-sm);
+  }
+  
+  .projectLink {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Tablet specific adjustments */
+@media (min-width: $mantine-breakpoint-sm) and (max-width: $mantine-breakpoint-lg) {
+  .projectCard {
+    min-height: 280px;
+  }
+  
+  .projectTitle {
+    font-size: 1.2rem;
+  }
+  
+  .projectDescription {
+    font-size: 0.85rem;
+  }
+}
+
+/* Desktop specific adjustments */
+@media (min-width: $mantine-breakpoint-lg) {
+  .projectCard {
+    min-height: 320px;
+  }
+  
+  .projectTitle {
+    font-size: 1.3rem;
+  }
+  
+  .projectDescription {
+    font-size: 0.9rem;
+  }
+}
