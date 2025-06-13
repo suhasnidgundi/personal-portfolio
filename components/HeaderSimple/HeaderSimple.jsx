@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation"; // Add this import
 import {
   Container,
   Group,
@@ -40,13 +41,16 @@ const links = [
 export function HeaderSimple() {
   const [opened, { toggle }] = useDisclosure(false);
   const [drawerOpened, { open, close }] = useDisclosure(false);
-  const [active, setActive] = useState(links[0].link);
+  const pathname = usePathname(); // Get current pathname
+  const [active, setActive] = useState("");
   const { colorScheme, setColorScheme } = useMantineColorScheme();
   const [mounted, setMounted] = useState(false);
 
+  // Set active state based on current pathname
   useEffect(() => {
     setMounted(true);
-  }, []);
+    setActive(pathname);
+  }, [pathname]);
 
   const items = links.map((link) => (
     <Link
@@ -146,4 +150,4 @@ export function HeaderSimple() {
       </Drawer>
     </>
   );
-}
+} 
