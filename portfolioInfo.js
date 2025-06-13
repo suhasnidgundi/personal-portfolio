@@ -5,26 +5,26 @@ export const portfolio = {
     email: "suhasnidgundi@gmail.com",
   },
 
-  socialLinks: [
+ socialLinks: [
     {
       name: "LinkedIn",
       url: "https://www.linkedin.com/in/suhasnidgundi/",
-      image: "/images/linkedIn_icon.png",
+      icon: "IconBrandLinkedin", // Changed from image to icon
     },
     {
       name: "GitHub",
       url: "https://github.com/suhasnidgundi",
-      image: "/images/github.webp",
+      icon: "IconBrandGithub", // Changed from image to icon
     },
     {
       name: "Instagram",
       url: "https://www.instagram.com/just.another.suhas",
-      image: "/images/instagram_icon.png",
+      icon: "IconBrandInstagram", // Changed from image to icon
     },
     {
       name: "ORCID",
       url: "https://orcid.org/0009-0004-1241-6596",
-      image: "/images/orcid_icon.png",
+      icon: "IconFileText", // Using a generic icon for ORCID as there's no specific one
     },
   ],
 

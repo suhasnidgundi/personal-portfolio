@@ -14,11 +14,20 @@ import {
   rem,
   Divider,
   useMantineTheme,
-  Tabs
+  Tabs,
+  ActionIcon
 } from "@mantine/core";
-import { IconCheck, IconCode, IconDeviceDesktop, IconBriefcase, IconSchool } from "@tabler/icons-react";
+import { IconCheck, IconCode, IconDeviceDesktop, IconBriefcase, IconSchool, IconBrandLinkedin, IconBrandGithub, IconBrandInstagram, IconFileText } from "@tabler/icons-react";
 import { portfolio } from "@/portfolioInfo";
 import { Timeline } from "@/components/Timeline/Timeline";
+
+const iconMap = {
+  IconBrandLinkedin,
+  IconBrandGithub,
+  IconBrandInstagram,
+  IconFileText
+};
+
 
 export default function AboutPage() {
   const theme = useMantineTheme();
@@ -66,22 +75,23 @@ export default function AboutPage() {
                   <strong>Email:</strong> {portfolio.personalInfo.email}
                 </Text>
                 <Group mt="xs" spacing="xs">
-                  {portfolio.socialLinks.map((link) => (
-                    <a
-                      key={link.name}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ textDecoration: 'none' }}
-                    >
-                      <Image
-                        src={link.image}
-                        width={32}
-                        height={32}
-                        alt={link.name}
-                      />
-                    </a>
-                  ))}
+                  {portfolio.socialLinks.map((link) => {
+                    const IconComponent = iconMap[link.icon];
+                    return (
+                      <ActionIcon
+                        key={link.name}
+                        component="a"
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        variant="light"
+                        size="lg"
+                        radius="md"
+                      >
+                        <IconComponent size={20} />
+                      </ActionIcon>
+                    );
+                  })}
                 </Group>
               </Stack>
             </Card>

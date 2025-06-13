@@ -20,12 +20,12 @@ import { useDisclosure } from "@mantine/hooks";
 import {
   IconSun,
   IconMoon,
-  IconPdf,
   IconBrandGithub,
   IconBrandLinkedin,
   IconBrandInstagram,
   IconBrandGmail,
-  IconMail
+  IconMail,
+  IconFileCv
 } from "@tabler/icons-react";
 import classes from "./HeaderSimple.module.css";
 import Link from "next/link";
@@ -106,7 +106,7 @@ export function HeaderSimple() {
                 aria-label="Download resume"
                 onClick={() => { document.location.href = "/resume.pdf"; }}
               >
-                <IconPdf size="2rem" />
+                <IconFileCv size="2rem" />
               </ActionIcon>
             </Tooltip>
           </Group>
