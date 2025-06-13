@@ -13,10 +13,12 @@ import {
   ThemeIcon,
   rem,
   Divider,
-  useMantineTheme
+  useMantineTheme,
+  Tabs
 } from "@mantine/core";
-import { IconCheck, IconCode, IconDeviceDesktop } from "@tabler/icons-react";
+import { IconCheck, IconCode, IconDeviceDesktop, IconBriefcase, IconSchool } from "@tabler/icons-react";
 import { portfolio } from "@/portfolioInfo";
+import { Timeline } from "@/components/Timeline/Timeline";
 
 export default function AboutPage() {
   const theme = useMantineTheme();
@@ -323,66 +325,37 @@ export default function AboutPage() {
 
         <Divider my="xl" />
 
-        {/* Education & Experience Section */}
+        {/* Education & Experience Timeline Section */}
         <Stack spacing="md">
-          <Title order={2}>Education & Experience</Title>
+          <Title order={2}>My Journey</Title>
+          <Text c="dimmed">
+            Explore my educational background and professional experience through this interactive timeline.
+          </Text>
 
-          <Grid gutter="xl">
-            <Grid.Col span={{ base: 12, md: 6 }}>
-              <Card withBorder p="md" radius="md">
-                <Title order={3} mb="md">Education</Title>
+          <Tabs defaultValue="experience" variant="pills" radius="md">
+            <Tabs.List grow>
+              <Tabs.Tab 
+                value="experience" 
+                leftSection={<IconBriefcase style={{ width: rem(16), height: rem(16) }} />}
+              >
+                Experience
+              </Tabs.Tab>
+              <Tabs.Tab 
+                value="education"
+                leftSection={<IconSchool style={{ width: rem(20), height: rem(20) }} />}
+              >
+                Education
+              </Tabs.Tab>
+            </Tabs.List>
 
-                <Stack spacing="lg">
-                  <Stack spacing="xs">
-                    <Title order={4}>Computer Science Degree</Title>
-                    <Text fw={500}>University Name</Text>
-                    <Text c="dimmed" size="sm">2020 - 2024</Text>
-                    <Text>
-                      Studied core computer science concepts, data structures, algorithms,
-                      and modern software development methodologies.
-                    </Text>
-                  </Stack>
+            <Tabs.Panel value="experience" pt="xl">
+              <Timeline type="experience" />
+            </Tabs.Panel>
 
-                  <Stack spacing="xs">
-                    <Title order={4}>Web Development Certification</Title>
-                    <Text fw={500}>Online Learning Platform</Text>
-                    <Text c="dimmed" size="sm">2022</Text>
-                    <Text>
-                      Advanced training in full-stack web development, focusing on modern JavaScript frameworks.
-                    </Text>
-                  </Stack>
-                </Stack>
-              </Card>
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 6 }}>
-              <Card withBorder p="md" radius="md">
-                <Title order={3} mb="md">Experience</Title>
-
-                <Stack spacing="lg">
-                  <Stack spacing="xs">
-                    <Title order={4}>Software Engineer</Title>
-                    <Text fw={500}>Company Name</Text>
-                    <Text c="dimmed" size="sm">2023 - Present</Text>
-                    <Text>
-                      Developing and maintaining web applications using React, Next.js, and Node.js.
-                      Working in cross-functional teams to deliver high-quality software products.
-                    </Text>
-                  </Stack>
-
-                  <Stack spacing="xs">
-                    <Title order={4}>Frontend Developer Intern</Title>
-                    <Text fw={500}>Internship Company</Text>
-                    <Text c="dimmed" size="sm">2022 - 2023</Text>
-                    <Text>
-                      Contributed to building responsive user interfaces, implemented new features,
-                      and collaborated with the design team to improve user experience.
-                    </Text>
-                  </Stack>
-                </Stack>
-              </Card>
-            </Grid.Col>
-          </Grid>
+            <Tabs.Panel value="education" pt="xl">
+              <Timeline type="education" />
+            </Tabs.Panel>
+          </Tabs>
         </Stack>
       </Stack>
     </Container>

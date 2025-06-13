@@ -11,6 +11,7 @@ const nextConfig = {
       "@mantine/spotlight",
       "@mantine/carousel",
       "@mantine/code-highlight",
+      "@tabler/icons-react"
     ],
   },
   webpack: (config) => {
