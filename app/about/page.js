@@ -51,7 +51,7 @@ export default function AboutPage() {
             <Card radius="md" p="xl" withBorder>
               <Card.Section>
                 <Image
-                  src="/images/profile.jpg"
+                  src="/images/suhasnidgundi_2.png"
                   height={300}
                   alt="Suhas Nidgundi"
                   fallbackSrc="https://placehold.co/600x400?text=Suhas+Nidgundi"
