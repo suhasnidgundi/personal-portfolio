@@ -23,6 +23,7 @@ import {
   IconAlertCircle
 } from '@tabler/icons-react';
 import { useProjects } from '@/hooks/useProjects';
+import ProjectPageSkeleton from '@/components/Skeletons/ProjectPageSkeleton';
 
 const ProjectCard = ({ project }) => {
   const [mediaType, setMediaType] = useState('image');
@@ -135,13 +136,7 @@ const Projects = () => {
   const filteredProjects = getProjectsByTag(activeTab);
 
   if (loading) {
-    return (
-      <Container size="lg" py={40}>
-        <Center>
-          <Loader size="xl" />
-        </Center>
-      </Container>
-    );
+    return <ProjectPageSkeleton />;
   }
 
   if (error) {

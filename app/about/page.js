@@ -20,6 +20,8 @@ import {
 import { IconCheck, IconCode, IconDeviceDesktop, IconBriefcase, IconSchool, IconBrandLinkedin, IconBrandGithub, IconBrandInstagram, IconFileText } from "@tabler/icons-react";
 import { portfolio } from "@/portfolioInfo";
 import { Timeline } from "@/components/Timeline/Timeline";
+import { useEffect, useState } from "react";
+import AboutPageSkeleton from "@/components/Skeletons/AboutPageSkeleton";
 
 const iconMap = {
   IconBrandLinkedin,
@@ -30,7 +32,21 @@ const iconMap = {
 
 
 export default function AboutPage() {
+  const [loading, setLoading] = useState(true);
   const theme = useMantineTheme();
+
+  // Simulate loading state
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500); // Adjust timing as needed
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <AboutPageSkeleton />;
+  }
 
   return (
     <Container size="lg">
@@ -344,13 +360,13 @@ export default function AboutPage() {
 
           <Tabs defaultValue="experience" variant="pills" radius="md">
             <Tabs.List grow>
-              <Tabs.Tab 
-                value="experience" 
+              <Tabs.Tab
+                value="experience"
                 leftSection={<IconBriefcase style={{ width: rem(16), height: rem(16) }} />}
               >
                 Experience
               </Tabs.Tab>
-              <Tabs.Tab 
+              <Tabs.Tab
                 value="education"
                 leftSection={<IconSchool style={{ width: rem(20), height: rem(20) }} />}
               >
