@@ -20,8 +20,6 @@ import {
 import { IconCheck, IconCode, IconDeviceDesktop, IconBriefcase, IconSchool, IconBrandLinkedin, IconBrandGithub, IconBrandInstagram, IconFileText } from "@tabler/icons-react";
 import { portfolio } from "@/portfolioInfo";
 import { Timeline } from "@/components/Timeline/Timeline";
-import { useEffect, useState } from "react";
-import AboutPageSkeleton from "@/components/Skeletons/AboutPageSkeleton";
 
 const iconMap = {
   IconBrandLinkedin,
@@ -32,21 +30,7 @@ const iconMap = {
 
 
 export default function AboutPage() {
-  const [loading, setLoading] = useState(true);
   const theme = useMantineTheme();
-
-  // Simulate loading state
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1500); // Adjust timing as needed
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) {
-    return <AboutPageSkeleton />;
-  }
 
   return (
     <Container size="lg">

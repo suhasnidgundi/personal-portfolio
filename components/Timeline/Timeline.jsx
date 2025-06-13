@@ -24,10 +24,11 @@ import {
 import { useState, useEffect } from 'react';
 import classes from './Timeline.module.css';
 import { getTimelineData } from '@/libs/timelineData';
+import TimelineSkeleton from '../Skeletons/TimelineSkeleton';
 
 export function Timeline({ type = 'education' }) {
-  const [timelineData, setTimelineData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [timelineData, setTimelineData] = useState([]);
   const theme = useMantineTheme();
 
   useEffect(() => {
@@ -69,21 +70,8 @@ export function Timeline({ type = 'education' }) {
     return `${start} - ${end}`;
   };
 
-  if (loading) {
-    return (
-      <Stack spacing="md">
-        {[...Array(3)].map((_, index) => (
-          <Card key={index} withBorder p="lg" radius="md">
-            <Stack spacing="sm">
-              <Skeleton height={20} width="60%" />
-              <Skeleton height={16} width="40%" />
-              <Skeleton height={14} width="30%" />
-              <Skeleton height={60} />
-            </Stack>
-          </Card>
-        ))}
-      </Stack>
-    );
+   if (loading) {
+    return <TimelineSkeleton />;
   }
 
   if (timelineData.length === 0) {
